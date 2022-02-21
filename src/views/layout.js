@@ -7,7 +7,9 @@ function Layout() {
   return (
     <>
       <Header></Header>
-      <Outlet />
+      <div className="flex-grow-1">
+        <Outlet />
+      </div>
       <Footer></Footer>
     </>
   );
