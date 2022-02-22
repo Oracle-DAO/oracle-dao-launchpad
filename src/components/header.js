@@ -1,8 +1,7 @@
 import * as React from "react";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import { ReactComponent as Logo } from "../assets/svg/logo.svg";
-
-import styled from "@emotion/styled";
+import ConnectMenu from "./connect-button";
 
 const links = [
   {
@@ -39,7 +38,7 @@ const Header = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark copyright">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
+        <a className="navbar-brand" href="/">
           <Logo />
         </a>
         <span></span>
@@ -61,6 +60,9 @@ const Header = () => {
                 <CustomLink to={link.path}>{link.text}</CustomLink>
               </li>
             ))}
+            <li>
+              <ConnectMenu></ConnectMenu>
+            </li>
           </ul>
         </div>
       </div>

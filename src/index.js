@@ -5,15 +5,18 @@ import { BrowserRouter } from "react-router-dom";
 
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
+import { Web3ContextProvider } from "./hooks";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "./index.scss";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Web3ContextProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Web3ContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
