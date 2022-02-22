@@ -4,8 +4,8 @@ import Web3Modal from "web3modal";
 import { StaticJsonRpcProvider, Web3Provider } from "@ethersproject/providers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
-import { getMainnetURI, swithNetwork } from "../../helpers";
-import { DEFAULD_NETWORK, Networks, messages } from "../../constants";
+import { getMainnetURI, swithNetwork } from "../helpers";
+import { DEFAULD_NETWORK, Networks, messages } from "../constants";
 
 const Web3Context = React.createContext(null);
 

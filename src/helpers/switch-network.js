@@ -1,3 +1,5 @@
+import { getMainnetURI } from "./get-mainnet-uri";
+
 const switchRequest = () => {
   return window.ethereum.request({
     method: "wallet_switchEthereumChain",
@@ -12,7 +14,7 @@ const addChainRequest = () => {
       {
         chainId: "0x24C",
         chainName: "Metis Stardust Testnet",
-        rpcUrls: ["https://stardust.metis.io/?owner=588"],
+        rpcUrls: [getMainnetURI()],
         blockExplorerUrls: ["https://stardust-explorer.metis.io/"],
         nativeCurrency: {
           name: "METIS",

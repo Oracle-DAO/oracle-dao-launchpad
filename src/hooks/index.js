@@ -1,1 +1,5 @@
-export * from "./web3";
+export {
+  useAddress,
+  useWeb3Context,
+  Web3ContextProvider,
+} from "./web3-context";
