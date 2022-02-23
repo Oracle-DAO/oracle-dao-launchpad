@@ -12,7 +12,7 @@ import {
 } from "@mui/icons-material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import data from "./data";
+import data from "../assets/data";
 import { createTheme } from '@mui/material';
 import { ThemeProvider } from "@emotion/react";
 
@@ -24,20 +24,10 @@ const theme = createTheme({
       xs: 300, // phone
       sm: 600, // tablets
       md: 900, // small laptop
-      mlg : 1000,
       lg: 1200, // desktop
       xl: 1536 // large screens
     }
   }
-});
-
-const styles = (theme) => ({
-  root: {
-    backgroundColor: 'blue',
-    [theme.breakpoints.up('md')]: {
-      backgroundColor: 'red',
-    },
-  },
 });
 
 

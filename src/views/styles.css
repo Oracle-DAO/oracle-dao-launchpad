@@ -60,66 +60,67 @@
       inset 2px 2px 3px rgba(0, 0, 0, 0.6);
   }
   .tab-div {
-    padding-bottom: 20px;
+    margin: 5em;
   }
 
   @media (max-width: 1000px) {
     .headline-root {
-      background-color: yellow;
       display: flex;
-      justify-content: center;
       flex-direction: column;
-      margin: 20px 0px;
+      justify-content: center;
     }
     .headline-left-box {
       display: flex;
       justify-content: center;
-      background-color: red;
       flex-direction: column;
       padding-inline: 2em;
       width: 75%;
+      margin-left: 2em;
+      margin-top: 2em;
     }
     .headline-right-box {
-      background-color: green;
+      margin: 1em;
       display: flex;
-      flex-direction: column;
       justify-content: center;
-      margin: 2em;
+    }
+    .headline-img{
+      max-width: 100%;
     }
   }
   
   .headline-description {
     font-size: 1.5em;
-    margin: 10px 0;
+    margin: 2em 0em;
+    color: white;
   }
   
   .headline-title {
     font-size: 3em;
     margin: 10px 0;
+    color: white;
   }
   
   @media (min-width: 1000px) {
     .headline-root {
-      background-color: yellow;
       display: flex;
       justify-content: center;
-      margin: 20px 0px;
+      margin: 3em 0em;
       padding: 0% 10%;
     }
     .headline-left-box {
       display: flex;
       justify-content: center;
-      background-color: red;
       width: 50%;
       flex-direction: column;
-      padding-inline: 20px;
+      padding-inline: 2em;
     }
     .headline-right-box {
       width: 50%;
-      background-color: green;
       display: flex;
-      flex-direction: column;
       justify-content: center;
+    }
+    .headline-img{
+      max-width: 100%;
     }
   }
   
