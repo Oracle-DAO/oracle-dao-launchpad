@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
-import { ReactComponent as Logo } from "../assets/svg/logo.svg";
-import ConnectMenu from "./connect-button";
+import { ReactComponent as Logo } from "../../assets/svg/logo.svg";
+import ConnectMenu from "../connect-button";
 
 const links = [
   {
