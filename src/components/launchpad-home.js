@@ -62,7 +62,7 @@ function MenuInterface() {
                     </ul>
                 </div>
             </div>
-            <Grid container justifyContent="center" spacing={5}>
+            <Grid container justifyContent="center" spacing={5} marginBottom={5}>
                 {data.map((value) => {
                     return (
                         <Grid item xs={10} sm={8} md={5} lg={4}>
@@ -81,7 +81,7 @@ function LaunchpadHome(props) {
         setValue(newValue);
     };
     return (
-        <div class="card">
+        <div className="card-root">
             <img
                 src="https://shortpixel.com/img/slider/berries-optimized-by-shortpixel.jpg"
                 alt="Potato"
@@ -153,23 +153,6 @@ function LaunchpadHome(props) {
                 </div>
             ) : (
                 <div>
-                    <div class="content">
-                        <Typography gutterBottom variant="h5" component="div">
-                            DAO SCREENING
-                        </Typography>
-                        <div>
-                            <CheckCircle/>
-                            <Typography gutterBottom variant="subtitle1" component="div">
-                                Metrics advised by DAO Maker
-                            </Typography>
-                        </div>
-                        <div>
-                            <Cancel/>
-                            <Typography gutterBottom variant="subtitle1" component="div">
-                                Controlled Cap Table
-                            </Typography>
-                        </div>
-                    </div>
                 </div>
             )}
             <div class="button-div">

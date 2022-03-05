@@ -3,6 +3,9 @@
         background-image: url("../assets/img/main-bg.png");
         padding-left: 1.5em;
         padding-right: 1.5em;
+        padding-top: 2em;
+        background-size: cover;
+        font-family: "Poppins", sans-serif;
     }
 
     .headline-root {
@@ -34,9 +37,12 @@
 
 @media (min-width: 1000px) {
     .main {
+        padding-top: 2em;
         background-image: url("../assets/img/main-bg.png");
         padding-left: 7em;
         padding-right: 7em;
+        background-size: cover;
+        font-family: "Poppins", sans-serif;
     }
 
     .headline-root {
@@ -113,13 +119,6 @@ ul.nav li {
 @media (max-width : 600px) {
     ul.nav li {
         padding-inline: 1.2em;
-        padding-top: 0.7em;
-        padding-bottom: 0.7em;
-        text-align: center;
-        color: white;
-        cursor: pointer;
-        transition: all 0.7s;
-        border-radius: 1.5em;
     }
 }
 ul.nav li:hover {
@@ -130,15 +129,16 @@ ul.nav li.active {
     background: rgb(88,28,241);
 }
 
-.card {
+.card-root {
+    background-color: inherit;
     max-width: 100%;
-    border-radius: 20px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 2em;
+    box-shadow: 0 0 0.2em 0.2em rgb(88,28,241);
 }
 
 .img {
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-top-left-radius: 2em;
+    border-top-right-radius: 2em;
     width: 100%;
 }
 
@@ -156,7 +156,7 @@ ul.nav li.active {
 }
 
 .content > div > p:nth-child(1){
-    color: black;
+    color: white;
     font-weight: bold;
     font-size: 2em;
     letter-spacing: 0.1em;
@@ -165,7 +165,7 @@ ul.nav li.active {
 }
 
 .content-text-title{
-    color: black;
+    color: white;
     font-weight: 250;
     font-size: 0.8em;
     letter-spacing: 0.1em;
@@ -174,15 +174,15 @@ ul.nav li.active {
 
 .content-time{
     color: darkviolet;
-    font-weight: 250;
+    font-weight: 350;
     font-size: 1.2em;
     letter-spacing: 0.1em;
     line-height: 0.8em;
 }
 
 .content-text{
-    color: black;
-    font-weight: 250;
+    color: white;
+    font-weight: 350;
     font-size: 1.2em;
     letter-spacing: 0.1em;
     line-height: 0.8em;
@@ -198,59 +198,22 @@ ul.nav li.active {
     width: 70%;
     border: 0;
     line-height: 2.5;
-    padding: 0 20px;
-    font-size: 1rem;
+    padding: 0 2em;
+    font-size: 1em;
     text-align: center;
     color: #fff;
     text-shadow: 1px 1px 1px #000;
     border-radius: 40px;
-    background-color: blue;
-    background-image: linear-gradient(
-            to top left,
-            rgba(0, 0, 0, 0.2),
-            rgba(0, 0, 0, 0.2) 30%,
-            rgba(0, 0, 0, 0)
-    );
+    background-color: darkviolet;
     box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.6),
     inset -2px -2px 3px rgba(0, 0, 0, 0.6);
 }
 
 .button:hover {
-    background-color: rgba(255, 0, 0, 1);
+    background-color: rgb(88,28,241);
 }
 
 .button:active {
-    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6),
-    inset 2px 2px 3px rgba(0, 0, 0, 0.6);
-}
-
-.headline-button {
-    margin-block: 20px;
-    max-width: 50%;
-    border: 0;
-    line-height: 2.5;
-    /*padding: 0 10px;*/
-    font-size: 1rem;
-    text-align: center;
-    color: #fff;
-    text-shadow: 1px 1px 1px #000;
-    border-radius: 30px;
-    background-color: blue;
-    background-image: linear-gradient(
-            to top left,
-            rgba(0, 0, 0, 0.2),
-            rgba(0, 0, 0, 0.2) 30%,
-            rgba(0, 0, 0, 0)
-    );
-    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.6),
-    inset -2px -2px 3px rgba(0, 0, 0, 0.6);
-}
-
-.headline-button:hover {
-    background-color: rgba(255, 0, 0, 1);
-}
-
-.headline-button:active {
     box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6),
     inset 2px 2px 3px rgba(0, 0, 0, 0.6);
 }
