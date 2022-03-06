@@ -1,5 +1,6 @@
 import "./home.css";
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, Grid } from "@mui/material";
 import { Language, Twitter, Telegram, GitHub } from "@mui/icons-material";
 import Tabs from "@mui/material/Tabs";
@@ -8,9 +9,11 @@ import data from "../../assets/data";
 
 export function MenuInterface() {
   const [activeTab, setActiveTab] = React.useState("two");
+
   const handleChange = (id) => {
     setActiveTab(id);
   };
+
   return (
     <>
       <div className="headline-root">
@@ -83,8 +86,12 @@ export function MenuInterface() {
 
 function LaunchpadHome(props) {
   const [value, setValue] = React.useState("one");
-  const handleChange = (event: React.SyntheticEvent, newValue) => {
+  const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+  let navigate = useNavigate();
+  const showProjectDetail = () => {
+    navigate("/project-details/1");
   };
   return (
     <div className="card-root">
@@ -155,7 +162,7 @@ function LaunchpadHome(props) {
         <div></div>
       )}
       <div class="button-div">
-        <button class="button" type="button">
+        <button class="button" type="button" onClick={showProjectDetail}>
           Research
         </button>
       </div>

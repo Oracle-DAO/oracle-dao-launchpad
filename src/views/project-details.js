@@ -1,6 +1,6 @@
 import * as React from "react";
-import { MenuInterface } from "../components";
+import { ProjectDetails } from "../components";
 
-export default function ProjectDetails() {
-  return <p>Project Details</p>;
+export default function ProjDetails() {
+  return <ProjectDetails />;
 }

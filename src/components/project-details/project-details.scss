@@ -1,0 +1,146 @@
+.project-details-wrapper {
+  .details {
+    background: rgba(230, 230, 230, 0.05);
+    border: 1px solid #3e46f3;
+    border-radius: 22px;
+    .icon {
+      width: 75px;
+      height: 75px;
+      background: rgba(255, 255, 255, 0.24);
+      border-radius: 22px;
+      display: inline-block;
+    }
+    .social-links {
+      height: 35px;
+      width: 35px;
+      background: rgba(255, 255, 255, 0.19);
+      color: white;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      border-radius: 50%;
+      justify-content: center;
+    }
+    .project-name {
+      font-weight: 600;
+      font-size: 26px;
+      line-height: 27px;
+      letter-spacing: 0.1em;
+      color: #ffffff;
+    }
+    .description {
+      font-size: 14px;
+      line-height: 24px;
+      letter-spacing: 0.1em;
+      color: #ffffff;
+    }
+  }
+  .additional-details {
+    .graph {
+      background-color: #6a606c;
+      border-radius: 22px;
+    }
+    .spacer {
+      width: 2rem;
+    }
+    .screening {
+      min-width: 425px;
+      background: rgba(230, 230, 230, 0.05);
+      border-radius: 22px;
+      .icon {
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.24);
+        border-radius: 11px;
+        display: inline-block;
+      }
+      .project-name {
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 27px;
+        letter-spacing: 0.1em;
+        color: #ffffff;
+      }
+      .s-title {
+        font-weight: 300;
+        font-size: 9px;
+        letter-spacing: 0.1em;
+        color: #ffffff;
+      }
+      .b-title {
+        font-weight: 500;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        color: #ffffff;
+      }
+      .ckbox {
+        background: rgba(251, 251, 251, 0.07);
+        border-radius: 4px;
+        height: 25px;
+        width: 25px;
+        font-size: 18px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 1rem;
+      }
+      .untick {
+        color: rgba(255, 255, 255, 0.21);
+      }
+      .tick {
+        background: rgba(96, 22, 252, 0.31);
+        color: #6016fc;
+      }
+    }
+  }
+  .table-section {
+    background: rgba(230, 230, 230, 0.05);
+    border-radius: 22px;
+    .tabs {
+      border-bottom: 1px solid rgba(96, 22, 252, 0.28);
+      button {
+        font-size: 16px;
+        line-height: 32px;
+        letter-spacing: 0.1em;
+        color: #ffffff;
+      }
+      .MuiTabs-indicator {
+        background: #3e46f3;
+      }
+    }
+    .spacer {
+      width: 2rem;
+    }
+    table {
+      width: 100%;
+      tr {
+        height: 34px;
+        border: 0.5px solid rgba(255, 255, 255, 0.2);
+      }
+      thead {
+        tr {
+          border-top-left-radius: 16px;
+          border-top-right-radius: 16px;
+          border: 0.5px solid transparent;
+        }
+      }
+      td {
+        font-size: 12px;
+        line-height: 16px;
+        padding: 0.5rem 1rem;
+        width: 50%;
+        color: #ffffff;
+      }
+      th {
+        background: rgba(255, 255, 255, 0.1);
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 16px;
+        color: #ffffff;
+        padding: 0.5rem 1rem;
+        border-top-left-radius: 16px;
+        border-top-right-radius: 16px;
+      }
+    }
+  }
+}
