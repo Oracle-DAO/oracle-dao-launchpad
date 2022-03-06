@@ -30,11 +30,11 @@ export const useAddress = () => {
 
 export const Web3ContextProvider = ({ children }) => {
   const [connected, setConnected] = useState(false);
-  const [chainID, setChainID] = useState(DEFAULD_NETWORK);
+  const [chainID] = useState(DEFAULD_NETWORK);
   const [providerChainID, setProviderChainID] = useState(DEFAULD_NETWORK);
   const [address, setAddress] = useState("");
 
-  const [uri, setUri] = useState(getMainnetURI());
+  const [uri] = useState(getMainnetURI());
   const [provider, setProvider] = useState(new StaticJsonRpcProvider(uri));
 
   const [web3Modal] = useState(

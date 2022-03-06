@@ -3,7 +3,9 @@ body,
 #root {
   height: 100%;
   width: 100%;
-  margin: 0;
-  padding: 0;
-  background-color: #090a36;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  background-image: url("assets/img/main-bg.png");
+  background-size: cover;
 }

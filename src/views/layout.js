@@ -1,12 +1,10 @@
 import { Outlet } from "react-router-dom";
 
-import Footer from "../components/footer";
-import Header from "../components/header/header";
-import "../components/styles.css"
+import { Header, Footer } from "../components";
 
 function Layout() {
   return (
-    <div class = "main">
+    <div className="container">
       <Header></Header>
       <div className="flex-grow-1">
         <Outlet />

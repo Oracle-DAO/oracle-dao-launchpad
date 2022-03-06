@@ -22,7 +22,7 @@ const P = styled.p`
   color: #ffffff;
 `;
 
-function ConnectMenu() {
+export function ConnectMenu() {
   const {
     connect,
     disconnect,
@@ -60,5 +60,3 @@ function ConnectMenu() {
     </Div>
   );
 }
-
-export default ConnectMenu;

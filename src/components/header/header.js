@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/svg/logo.svg";
-import ConnectMenu from "../connect-button";
-import "./header.css"
+import { ConnectMenu } from "../index";
+import "./header.css";
 
 const links = [
   {
@@ -40,7 +40,7 @@ function CustomLink({ children, to, ...props }) {
   );
 }
 
-const Header = () => {
+export const Header = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark copyright">
       <div className="container-fluid">
@@ -75,4 +75,3 @@ const Header = () => {
     </nav>
   );
 };
-export default Header;

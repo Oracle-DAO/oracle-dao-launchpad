@@ -9,6 +9,6 @@ const P = styled.p`
   margin: 0;
 `;
 
-export default function Footer() {
+export function Footer() {
   return <P>&copy; Oracle Finance, All Rights Reserved</P>;
 }
