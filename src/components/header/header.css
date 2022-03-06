@@ -1,0 +1,9 @@
+.navbar .navbar-nav {
+    width: 100%;
+}
+
+.nav-button{
+    display: flex;
+    position: absolute ;
+    right : 0;
+}

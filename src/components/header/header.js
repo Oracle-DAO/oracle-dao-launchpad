@@ -1,22 +1,28 @@
 import * as React from "react";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
-import { ReactComponent as Logo } from "../assets/svg/logo.svg";
-import ConnectMenu from "./connect-button";
+import { ReactComponent as Logo } from "../../assets/svg/logo.svg";
+import ConnectMenu from "../connect-button";
+import "./header.css"
 
 const links = [
   {
     id: 1,
-    text: "Fundraising",
+    text: "Flowchart",
     path: "/",
   },
   {
     id: 2,
-    text: "Stake",
+    text: "Roadmap",
     path: "/stake",
   },
   {
     id: 3,
-    text: "Hub",
+    text: "Team",
+    path: "/hub",
+  },
+  {
+    id: 4,
+    text: "ContactUs",
     path: "/hub",
   },
 ];
@@ -56,11 +62,11 @@ const Header = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center">
             {links.map((link) => (
-              <li className="nav-item " key={link.id}>
+              <li className="nav-item me-4" key={link.id}>
                 <CustomLink to={link.path}>{link.text}</CustomLink>
               </li>
             ))}
-            <li>
+            <li className="nav-button">
               <ConnectMenu></ConnectMenu>
             </li>
           </ul>
