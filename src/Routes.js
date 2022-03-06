@@ -4,6 +4,7 @@ import Layout from "./views/layout";
 import NotFound from "./views/404";
 
 const Dashboard = React.lazy(() => import("./views/dashboard"));
+const ProjectDetails = React.lazy(() => import("./views/project-details"));
 
 let routes = [
   {
@@ -15,6 +16,14 @@ let routes = [
         element: (
           <React.Suspense fallback={<>...</>}>
             <Dashboard />
+          </React.Suspense>
+        ),
+      },
+      {
+        path: "/project-details/:id",
+        element: (
+          <React.Suspense fallback={<>...</>}>
+            <ProjectDetails />
           </React.Suspense>
         ),
       },
