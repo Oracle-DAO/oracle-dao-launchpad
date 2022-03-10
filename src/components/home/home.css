@@ -114,6 +114,7 @@ ul.nav li.active {
   max-width: 100%;
   border-radius: 2em;
   box-shadow: 0 0 0.2em 0.2em rgb(88, 28, 241);
+  height: 100%;
 }
 
 .img {
@@ -125,6 +126,10 @@ ul.nav li.active {
 .icons {
   margin-top: 1em;
   margin-bottom: 1em;
+}
+
+.MuiTab-root{
+  color: white;
 }
 
 .content {
