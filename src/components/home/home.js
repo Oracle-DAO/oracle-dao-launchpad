@@ -1,4 +1,4 @@
-import "./home.css";
+import "./home.scss";
 import * as React from "react";
 import {useNavigate} from "react-router-dom";
 import {Button, Grid} from "@mui/material";
@@ -10,7 +10,6 @@ import {StyledEngineProvider} from '@mui/material/styles';
 
 export function MenuInterface() {
     const [activeTab, setActiveTab] = React.useState("two");
-
     const handleChange = (id) => {
         setActiveTab(id);
     };
@@ -48,8 +47,8 @@ export function MenuInterface() {
                     />
                 </box>
             </div>
-            <div class="tab-root">
-                <div class="tab-div">
+            <div className="tab-root">
+                <div className="tab-div">
                     <ul className="nav">
                         <li
                             onClick={() => handleChange("one")}
@@ -75,7 +74,7 @@ export function MenuInterface() {
             <Grid container justifyContent="center" spacing={5} marginBottom={5}>
                 {data.map((value) => {
                     return (
-                        <Grid item xs={10} sm={8} md={5} lg={4}>
+                        <Grid item xs={10} sm={8} md={6} lg={4}>
                             <LaunchpadHome {...value} />
                         </Grid>
                     );
@@ -95,14 +94,13 @@ function LaunchpadHome(props) {
         navigate("/project-details/1");
     };
     return (
-        <StyledEngineProvider injectFirst>
             <div className="card-root">
                 <img
                     src="https://shortpixel.com/img/slider/berries-optimized-by-shortpixel.jpg"
                     alt="Potato"
-                    class="img"
+                    className="img"
                 />
-                <div class="icons">
+                <div className="icons">
                     <Grid container justifyContent="flex-start" spacing={1}>
                         <Grid item xs={2}>
                             <Button>
@@ -126,14 +124,13 @@ function LaunchpadHome(props) {
                         </Grid>
                     </Grid>
                 </div>
-                <div>
+                <div className="tabs">
                     <Tabs
                         value={value}
                         onChange={handleChange}
-                        textColor="secondary"
+                        textColor="primary"
                         indicatorColor="secondary"
                         aria-label="secondary tabs"
-                        centered
                     >
                         <Tab value="one" label="Offering"/>
                         <Tab value="two" label="Screening"/>
@@ -141,7 +138,7 @@ function LaunchpadHome(props) {
                     </Tabs>
                 </div>
                 {value === "one" ? (
-                    <div class="content">
+                    <div className="content">
                         <div>
                             <p>{props.title}</p>
                             <div className="content-spacing">
@@ -163,12 +160,11 @@ function LaunchpadHome(props) {
                 ) : (
                     <div></div>
                 )}
-                <div class="button-div">
-                    <button class="button" type="button" onClick={showProjectDetail}>
+                <div className="button-div">
+                    <button className="button" type="button" onClick={showProjectDetail}>
                         Research
                     </button>
                 </div>
             </div>
-        </StyledEngineProvider>
     );
 }
