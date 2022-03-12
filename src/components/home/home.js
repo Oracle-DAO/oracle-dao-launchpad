@@ -161,7 +161,7 @@ function LaunchpadHome(props) {
                     <div></div>
                 )}
                 <div className="button-div">
-                    <button className="button" type="button" onClick={showProjectDetail}>
+                    <button className="research" type="button" onClick={showProjectDetail}>
                         Research
                     </button>
                 </div>
