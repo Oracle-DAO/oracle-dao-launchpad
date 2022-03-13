@@ -3,12 +3,19 @@ import * as React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 
+import LinearProgress from '@mui/material/LinearProgress';
+
+
 import "./project-details.scss";
 
 export function ProjectDetails() {
   const [activeTab, setactiveTab] = React.useState("p-details");
   const handleChange = (event, newValue) => {
     setactiveTab(newValue);
+  };
+  const [progress, setProgress] = React.useState(90);
+  const invest = () => {
+
   };
 
   return (
@@ -83,6 +90,16 @@ export function ProjectDetails() {
               <span className="b-title">DAO Approved Metrics</span>
             </div>
           </div>
+        </div>
+      </div >
+      <div className="progress d-flex mt-5 flex-row align-items-center">
+        <div className="slider">
+            <LinearProgress variant="determinate" value={progress} />
+        </div>
+        <div className="invest d-flex justify-content-center">
+          <button className="invest-button" type="button" onClick={invest}>
+            Invest
+          </button>
         </div>
       </div>
       <div className="table-section d-flex mt-5 mb-5 p-4 flex-column">
