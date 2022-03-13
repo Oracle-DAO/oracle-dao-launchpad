@@ -9,15 +9,17 @@ import { Web3ContextProvider } from "./hooks";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "./index.scss";
+import store from "./store/store";
+import {Provider} from "react-redux";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Web3ContextProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Web3ContextProvider>
-  </React.StrictMode>,
+    <Provider store={store}>
+        <Web3ContextProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </Web3ContextProvider>
+    </Provider>,
   document.getElementById("root")
 );
 
