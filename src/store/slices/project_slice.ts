@@ -5,6 +5,7 @@ import {Networks} from "../../constants/blockchain";
 import {ADDRESSES} from "../../constants";
 import {PublicSale} from "../../abis";
 import { ethers } from "ethers";
+import {add} from "husky";
 
 
 export interface IProjectTime {
@@ -34,31 +35,40 @@ export interface IProjectDetails {
 }
 
 interface ICalcProjectDetails {
-    projectAddress: string;
-    value: string | null;
     provider: StaticJsonRpcProvider | JsonRpcProvider;
     networkID: Networks;
 }
 
-export const fetchProjectDetails = createAsyncThunk("project/fetchProjectDetails", async ({ projectAddress, value, provider, networkID }: ICalcProjectDetails, { dispatch }) => {
+export const fetchProjectDetails = createAsyncThunk("project/fetchProjectDetails", async ({provider, networkID }: ICalcProjectDetails, { dispatch }) => {
 
     const addresses = ADDRESSES;
     const projectContract = new ethers.Contract(addresses.project1, PublicSale, provider);
-    // const projectAddress = projectContract.getProjectTokenAddress();
-    const ipfsId = projectContract.getIpfsId();
-    // const enabled = projectContract.contractStatus();
-    // const pricipleTokenAddress = projectContract.
-    // const amount = projectContract.
-    // const tokenInfo = projectContract.
-    // const projectTime = projectContract.
+    console.log(projectContract);
+    const address = await projectContract.getProjectTokenAddress();
+    console.log(address);
+    const ipfsId = await projectContract.getIpfsId();
+    const enabled = await projectContract.contractStatus();
+    const pricipleTokenAddress = await projectContract.getProjectDetails().pricipleTokenAddress;
+    const amount = await projectContract.getAmountInfo();
+    const tokenInfo = await projectContract.getTokenInfo();
+    const projectTime = await projectContract.getProjectTimeInfo();
+    console.log({
+        address,
+        amount,
+        tokenInfo,
+        projectTime,
+        ipfsId,
+        pricipleTokenAddress,
+        enabled,
+    });
     return {
-        projectAddress: "",
-        amount: {},
-        tokenInfo: {},
-        projectTime: {},
-        ipfsId: "",
-        pricipleTokenAddress: "",
-        enabled: false,
+        address,
+        amount,
+        tokenInfo,
+        projectTime,
+        ipfsId,
+        pricipleTokenAddress,
+        enabled,
     };
 })
 
@@ -75,6 +85,7 @@ const setProjectState = (state: IProjectDetailsSlice, payload: any) => {
     const projectAddress = payload.projectAddress;
     state[projectAddress] = {...state[projectAddress], ...payload};
     state.loading = false;
+    console.log(state);
 };
 
 const projectSlice = createSlice({

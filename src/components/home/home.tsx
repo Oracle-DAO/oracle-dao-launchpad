@@ -8,6 +8,7 @@ import Tab from "@mui/material/Tab";
 import data from "../../assets/data";
 import {StyledEngineProvider} from '@mui/material/styles';
 import {useDispatch} from "react-redux";
+import useProject from "../../hooks/projectinfo";
 
 export function MenuInterface() {
     const [activeTab, setActiveTab] = React.useState("two");
@@ -15,7 +16,8 @@ export function MenuInterface() {
         setActiveTab(id);
     };
     const dispatch = useDispatch();
-
+    const { project } = useProject();
+    console.log(project);
     return (
         <>
             <div className="headline-root">
@@ -74,13 +76,13 @@ export function MenuInterface() {
                 </div>
             </div>
             <Grid container justifyContent="center" spacing={5} marginBottom={5}>
-                {data.map((value) => {
-                    return (
-                        <Grid item xs={10} sm={8} md={6} lg={4}>
-                            <LaunchpadHome {...value} />
-                        </Grid>
-                    );
-                })}
+                {/*{project.map((value) => {*/}
+                {/*    return (*/}
+                {/*        <Grid item xs={10} sm={8} md={6} lg={4}>*/}
+                {/*            <LaunchpadHome {...value} />*/}
+                {/*        </Grid>*/}
+                {/*    );*/}
+                {/*})}*/}
             </Grid>
         </>
     );
