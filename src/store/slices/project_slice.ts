@@ -2,6 +2,10 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../store";
 import {JsonRpcProvider, StaticJsonRpcProvider} from "@ethersproject/providers";
 import {Networks} from "../../constants/blockchain";
+import {ADDRESSES} from "../../constants";
+import {PublicSale} from "../../abis";
+import { ethers } from "ethers";
+
 
 export interface IProjectTime {
     startTime: number;
@@ -37,7 +41,16 @@ interface ICalcProjectDetails {
 }
 
 export const fetchProjectDetails = createAsyncThunk("project/fetchProjectDetails", async ({ projectAddress, value, provider, networkID }: ICalcProjectDetails, { dispatch }) => {
-    // Add logic in here and return in the following format
+
+    const addresses = ADDRESSES;
+    const projectContract = new ethers.Contract(addresses.project1, PublicSale, provider);
+    // const projectAddress = projectContract.getProjectTokenAddress();
+    const ipfsId = projectContract.getIpfsId();
+    // const enabled = projectContract.contractStatus();
+    // const pricipleTokenAddress = projectContract.
+    // const amount = projectContract.
+    // const tokenInfo = projectContract.
+    // const projectTime = projectContract.
     return {
         projectAddress: "",
         amount: {},

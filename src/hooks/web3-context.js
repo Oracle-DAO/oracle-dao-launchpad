@@ -5,7 +5,7 @@ import { StaticJsonRpcProvider, Web3Provider } from "@ethersproject/providers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
 import { getMainnetURI, swithNetwork } from "../helpers";
-import { DEFAULD_NETWORK, Networks, messages } from "../constants";
+import { DEFAULT_NETWORK, Networks, messages } from "../constants";
 
 const Web3Context = React.createContext(null);
 
@@ -30,8 +30,8 @@ export const useAddress = () => {
 
 export const Web3ContextProvider = ({ children }) => {
   const [connected, setConnected] = useState(false);
-  const [chainID] = useState(DEFAULD_NETWORK);
-  const [providerChainID, setProviderChainID] = useState(DEFAULD_NETWORK);
+  const [chainID] = useState(DEFAULT_NETWORK);
+  const [providerChainID, setProviderChainID] = useState(DEFAULT_NETWORK);
   const [address, setAddress] = useState("");
 
   const [uri] = useState(getMainnetURI());
@@ -113,7 +113,7 @@ export const Web3ContextProvider = ({ children }) => {
   }, [provider, web3Modal, connected]);
 
   const checkWrongNetwork = async () => {
-    if (providerChainID !== DEFAULD_NETWORK) {
+    if (providerChainID !== DEFAULT_NETWORK) {
       const shouldSwitch = window.confirm(messages.switch_to_stardust);
       if (shouldSwitch) {
         await swithNetwork();

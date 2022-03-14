@@ -4,4 +4,4 @@ export enum Networks {
     STARDUST = 588,
 }
 
-export const DEFAULD_NETWORK = Networks.STARDUST;
+export const DEFAULT_NETWORK = Networks.STARDUST;

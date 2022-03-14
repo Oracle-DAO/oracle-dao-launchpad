@@ -1,23 +1,25 @@
 import "./home.scss";
 import * as React from "react";
 import {useNavigate} from "react-router-dom";
-import {Button, Grid} from "@mui/material";
+import {Button, Grid, Box} from "@mui/material";
 import {Language, Twitter, Telegram, GitHub} from "@mui/icons-material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import data from "../../assets/data";
 import {StyledEngineProvider} from '@mui/material/styles';
+import {useDispatch} from "react-redux";
 
 export function MenuInterface() {
     const [activeTab, setActiveTab] = React.useState("two");
-    const handleChange = (id) => {
+    const handleChange = (id : any) => {
         setActiveTab(id);
     };
+    const dispatch = useDispatch();
 
     return (
         <>
             <div className="headline-root">
-                <box className="headline-left-box">
+                <Box className="headline-left-box">
                     <section className="main-info">
                         <div>
                             <p>What is Oracle Finance?</p>
@@ -38,14 +40,14 @@ export function MenuInterface() {
                             </div>
                         </div>
                     </section>
-                </box>
-                <box className="headline-right-box">
+                </Box>
+                <Box className="headline-right-box">
                     <img
                         src="https://shortpixel.com/img/slider/berries-optimized-by-shortpixel.jpg"
                         alt="Potato"
                         className="headline-img"
                     />
-                </box>
+                </Box>
             </div>
             <div className="tab-root">
                 <div className="tab-div">
@@ -84,9 +86,9 @@ export function MenuInterface() {
     );
 }
 
-function LaunchpadHome(props) {
+function LaunchpadHome(props : any) {
     const [value, setValue] = React.useState("one");
-    const handleChange = (event, newValue) => {
+    const handleChange = (event : any, newValue : any) => {
         setValue(newValue);
     };
     let navigate = useNavigate();
