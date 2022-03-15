@@ -12,13 +12,13 @@ const addChainRequest = () => {
     method: "wallet_addEthereumChain",
     params: [
       {
-        chainId: "0x24C",
-        chainName: "Metis Stardust Testnet",
+        chainId: "0xa515",
+        chainName: "Oasis Emerald Testnet",
         rpcUrls: [getMainnetURI()],
-        blockExplorerUrls: ["https://stardust-explorer.metis.io/"],
+        blockExplorerUrls: ["https://testnet.explorer.emerald.oasis.dev"],
         nativeCurrency: {
-          name: "METIS",
-          symbol: "METIS",
+          name: "OASIS",
+          symbol: "OASIS",
           decimals: 18,
         },
       },
@@ -30,7 +30,7 @@ export const swithNetwork = async () => {
   if (window.ethereum) {
     try {
       await switchRequest();
-    } catch (error) {
+    } catch (error: any) {
       if (error.code === 4902) {
         try {
           await addChainRequest();

@@ -1,3 +1,3 @@
 export * from "./blockchain";
-export * from "./addresses";
 export * from "./messages";
+export * from "./project_address";

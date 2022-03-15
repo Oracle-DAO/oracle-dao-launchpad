@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useWeb3Context } from "../hooks";
-import { DEFAULD_NETWORK } from "../constants";
+import { DEFAULT_NETWORK } from "../constants";
 
 import styled from "@emotion/styled";
 
@@ -42,7 +42,7 @@ export function ConnectMenu() {
     clickFunc = disconnect;
   }
 
-  if (isConnected && providerChainID !== DEFAULD_NETWORK) {
+  if (isConnected && providerChainID !== DEFAULT_NETWORK) {
     buttonText = "Wrong network";
     buttonStyle = { backgroundColor: "rgb(255, 67, 67)" };
     clickFunc = () => {
