@@ -1,22 +1,24 @@
 import * as React from "react";
+import { useParams } from "react-router-dom";
 
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 
-import LinearProgress from '@mui/material/LinearProgress';
+import LinearProgress from "@mui/material/LinearProgress";
 
-
+import { useProject } from "../../hooks";
 import "./project-details.scss";
 
 export function ProjectDetails() {
+  let { id } = useParams();
+  const { project } = useProject(id);
+  console.log(project);
   const [activeTab, setactiveTab] = React.useState("p-details");
   const handleChange = (event, newValue) => {
     setactiveTab(newValue);
   };
   const [progress, setProgress] = React.useState(90);
-  const invest = () => {
-
-  };
+  const invest = () => {};
 
   return (
     <div className="project-details-wrapper">
@@ -91,10 +93,10 @@ export function ProjectDetails() {
             </div>
           </div>
         </div>
-      </div >
+      </div>
       <div className="progress d-flex mt-5 flex-row align-items-center">
         <div className="slider">
-            <LinearProgress variant="determinate" value={progress} />
+          <LinearProgress variant="determinate" value={progress} />
         </div>
         <div className="invest d-flex justify-content-center">
           <button className="invest-button" type="button" onClick={invest}>

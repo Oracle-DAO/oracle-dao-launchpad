@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { BrowserRouter } from "react-router-dom";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistStore } from "redux-persist";
 
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
@@ -10,16 +12,19 @@ import { Web3ContextProvider } from "./hooks";
 import "bootstrap/dist/css/bootstrap.css";
 import "./index.scss";
 import store from "./store/store";
-import {Provider} from "react-redux";
+import { Provider } from "react-redux";
+
+let persistor = persistStore(store);
 
 ReactDOM.render(
-    <Provider store={store}>
-        <Web3ContextProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </Web3ContextProvider>
-    </Provider>,
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}></PersistGate>
+    <Web3ContextProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Web3ContextProvider>
+  </Provider>,
   document.getElementById("root")
 );
 
