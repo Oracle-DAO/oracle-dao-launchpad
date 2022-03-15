@@ -5,7 +5,7 @@ import {Networks} from "../../constants/blockchain";
 import {ADDRESSES} from "../../constants";
 import {PublicSale} from "../../abis";
 import { ethers } from "ethers";
-import {add} from "husky";
+// import {add} from "husky";
 
 
 export interface IProjectTime {
