@@ -1,11 +1,8 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {RootState} from "../store";
-import {JsonRpcProvider, StaticJsonRpcProvider} from "@ethersproject/providers";
-import {Networks} from "../../constants/blockchain";
-import {ADDRESSES} from "../../constants";
-import {PublicSale} from "../../abis";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { JsonRpcProvider, StaticJsonRpcProvider } from "@ethersproject/providers";
+import { Networks } from "../../constants";
+import { PublicSale } from "../../abis";
 import { ethers } from "ethers";
-// import {add} from "husky";
 
 
 export interface IProjectTime {
@@ -37,32 +34,22 @@ export interface IProjectDetails {
 interface ICalcProjectDetails {
     provider: StaticJsonRpcProvider | JsonRpcProvider;
     networkID: Networks;
+    address: string;
 }
 
-export const fetchProjectDetails = createAsyncThunk("project/fetchProjectDetails", async ({provider, networkID }: ICalcProjectDetails, { dispatch }) => {
+export const fetchProjectDetails = createAsyncThunk("project/fetchProjectDetails", async ({ provider, networkID, address }: ICalcProjectDetails, { dispatch }) => {
 
-    const addresses = ADDRESSES;
-    const projectContract = new ethers.Contract(addresses.project1, PublicSale, provider);
-    console.log(projectContract);
-    const address = await projectContract.getProjectTokenAddress();
-    console.log(address);
+    const projectContract = new ethers.Contract(address, PublicSale, provider);
+    const tokenAddress = await projectContract.getProjectTokenAddress();
     const ipfsId = await projectContract.getIpfsId();
     const enabled = await projectContract.contractStatus();
     const pricipleTokenAddress = await projectContract.getProjectDetails().pricipleTokenAddress;
     const amount = await projectContract.getAmountInfo();
     const tokenInfo = await projectContract.getTokenInfo();
     const projectTime = await projectContract.getProjectTimeInfo();
-    console.log({
-        address,
-        amount,
-        tokenInfo,
-        projectTime,
-        ipfsId,
-        pricipleTokenAddress,
-        enabled,
-    });
+
     return {
-        address,
+        address: tokenAddress,
         amount,
         tokenInfo,
         projectTime,
@@ -70,26 +57,24 @@ export const fetchProjectDetails = createAsyncThunk("project/fetchProjectDetails
         pricipleTokenAddress,
         enabled,
     };
+}, {
+    condition: (data, { getState, extra }) => {
+        const { projects }: any = getState();
+        const projDetails = projects[data.address];
+        if (projDetails.loading || (!projDetails.loading && !projDetails.error)) {
+            return false;
+        }
+    },
 })
 
 export interface IProjectDetailsSlice {
-    loading: boolean;
     [key: string]: any;
 }
 
-const initialState: IProjectDetailsSlice = {
-    loading: true
-};
-
-const setProjectState = (state: IProjectDetailsSlice, payload: any) => {
-    const projectAddress = payload.projectAddress;
-    state[projectAddress] = {...state[projectAddress], ...payload};
-    state.loading = false;
-    console.log(state);
-};
+const initialState: IProjectDetailsSlice = {};
 
 const projectSlice = createSlice({
-    name: "project",
+    name: "projects",
     initialState,
     reducers: {
         fetchProjectDetailSuccess(state, action) {
@@ -98,16 +83,22 @@ const projectSlice = createSlice({
     },
     extraReducers: builder => {
         builder
-            .addCase(fetchProjectDetails.pending, state => {
-                state.loading = true;
+            .addCase(fetchProjectDetails.pending, (state, action) => {
+                state[action.meta.arg.address] = {
+                    loading: true
+                }
             })
             .addCase(fetchProjectDetails.fulfilled, (state, action) => {
-                setProjectState(state, action.payload);
-                state.loading = false;
+                state[action.meta.arg.address] = {
+                    loading: false,
+                    ...action.payload
+                }
             })
-            .addCase(fetchProjectDetails.rejected, (state, { error }) => {
-                state.loading = false;
-                console.log(error);
+            .addCase(fetchProjectDetails.rejected, (state, action) => {
+                state[action.meta.arg.address] = {
+                    loading: false,
+                    error: action.error
+                }
             })
     },
 });
@@ -115,8 +106,3 @@ const projectSlice = createSlice({
 export default projectSlice.reducer;
 
 export const { fetchProjectDetailSuccess } = projectSlice.actions;
-
-const baseInfo = (state: RootState) => state.project;
-
-// Uncomment if required
-// export const getAccountState = createSelector(baseInfo, account => account);
