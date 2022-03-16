@@ -1,23 +1,61 @@
 import * as React from "react";
 import { useParams } from "react-router-dom";
-
+import { ethers } from "ethers";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-
 import LinearProgress from "@mui/material/LinearProgress";
 
-import { useProject } from "../../hooks";
+import { useProject, useWeb3Context } from "../../hooks";
+import { PublicSale } from "../../abis";
+import { ConnectMenu } from "../";
 import "./project-details.scss";
 
 export function ProjectDetails() {
+  const [activeTab, setactiveTab] = React.useState("p-details");
+  const [progress, setProgress] = React.useState(0);
+  const [amountToRaised, setAmountToRaised] = React.useState(0);
+  const [amountRaised, setAmountRaised] = React.useState(0);
+  const [invested, setInvested] = React.useState(0);
+  const [canInvest, setCanInvest] = React.useState(0);
+
   let { id } = useParams();
   const { project } = useProject(id);
-  console.log(project);
-  const [activeTab, setactiveTab] = React.useState("p-details");
+  const { provider, address } = useWeb3Context();
+
+  const projectContract = new ethers.Contract(id, PublicSale, provider);
+
+  const updateRasiedAmounts = () => {
+    projectContract.getAmountInfo().then((data) => {
+      const amountToRaised = data.totalAmountToRaise_ / Math.pow(10, 18);
+      const amountRaised = data.totalAmountRaised_ / Math.pow(10, 18);
+      setAmountToRaised(amountToRaised);
+      setAmountRaised(amountRaised);
+      const complition = (amountRaised * 100) / amountToRaised;
+      !isNaN(complition) && progress != complition && setProgress(complition);
+    });
+  };
+
   const handleChange = (event, newValue) => {
     setactiveTab(newValue);
   };
-  const [progress, setProgress] = React.useState(90);
+
+  React.useEffect(() => {
+    updateRasiedAmounts();
+    const interval = setInterval(updateRasiedAmounts, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  React.useEffect(() => {
+    if (address) {
+      projectContract.checkMaxTokenForUser(address).then((data) => {
+        setCanInvest(data / Math.pow(10, 18));
+      });
+      projectContract.userToTokenAmount(address).then((data) => {
+        setInvested(data / Math.pow(10, 18));
+      });
+    }
+  }, [address]);
+
   const invest = () => {};
 
   return (
@@ -94,15 +132,28 @@ export function ProjectDetails() {
           </div>
         </div>
       </div>
-      <div className="progress d-flex mt-5 flex-row align-items-center">
-        <div className="slider">
-          <LinearProgress variant="determinate" value={progress} />
+      <div className="progress-container flex-wrap flex-column d-flex mt-5 p-3">
+        <div className="flex-wrap d-flex flex-row align-items-center">
+          <div className="flex-grow-1 progress-line">
+            <LinearProgress variant="determinate" value={progress} />
+          </div>
+          <div className="ms-3">
+            {address && (
+              <button className="invest-button" type="button" onClick={invest}>
+                Invest
+              </button>
+            )}
+            {!address && <ConnectMenu></ConnectMenu>}
+          </div>
         </div>
-        <div className="invest d-flex justify-content-center">
-          <button className="invest-button" type="button" onClick={invest}>
-            Invest
-          </button>
-        </div>
+        {address && (
+          <>
+            <p>Amount to raise: {amountToRaised}</p>
+            <p>Amount raised: {amountRaised}</p>
+            <p>Invested: {invested}</p>
+            <p>Can Invest: {canInvest}</p>
+          </>
+        )}
       </div>
       <div className="table-section d-flex mt-5 mb-5 p-4 flex-column">
         <div className="tabs d-flex align-items-start">
