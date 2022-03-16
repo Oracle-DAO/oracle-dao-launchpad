@@ -40,7 +40,6 @@ interface ICalcProjectDetails {
 export const fetchProjectDetails = createAsyncThunk("project/fetchProjectDetails", async ({ provider, networkID, address }: ICalcProjectDetails, { dispatch }) => {
 
     const projectContract = new ethers.Contract(address, PublicSale, provider);
-    const tokenAddress = await projectContract.getProjectTokenAddress();
     const ipfsId = await projectContract.getIpfsId();
     const enabled = await projectContract.contractStatus();
     const pricipleTokenAddress = await projectContract.getProjectDetails().pricipleTokenAddress;
@@ -49,7 +48,7 @@ export const fetchProjectDetails = createAsyncThunk("project/fetchProjectDetails
     const projectTime = await projectContract.getProjectTimeInfo();
 
     return {
-        address: tokenAddress,
+        address: address,
         amount,
         tokenInfo,
         projectTime,
