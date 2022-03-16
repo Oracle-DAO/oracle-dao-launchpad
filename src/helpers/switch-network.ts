@@ -3,7 +3,7 @@ import { getMainnetURI } from "./get-mainnet-uri";
 const switchRequest = () => {
   return window.ethereum.request({
     method: "wallet_switchEthereumChain",
-    params: [{ chainId: "0x24C" }],
+    params: [{ chainId: "0xa515" }],
   });
 };
 
