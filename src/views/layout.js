@@ -1,15 +1,16 @@
 import { Outlet } from "react-router-dom";
 
-import { Header, Footer } from "../components";
+import { Header, Footer, Messages } from "../components";
 
 function Layout() {
   return (
     <>
-      <Header></Header>
+      <Messages />
+      <Header />
       <div className="flex-grow-1">
         <Outlet />
       </div>
-      <Footer></Footer>
+      <Footer />
     </>
   );
 }
