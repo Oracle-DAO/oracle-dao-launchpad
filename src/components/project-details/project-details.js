@@ -1,6 +1,8 @@
 import * as React from "react";
 import { useParams } from "react-router-dom";
 import { ethers } from "ethers";
+import { useDispatch } from "react-redux";
+
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import LinearProgress from "@mui/material/LinearProgress";
@@ -21,7 +23,7 @@ export function ProjectDetails() {
   let { id } = useParams();
   const { project } = useProject(id);
   const { provider, address } = useWeb3Context();
-
+  const dispatch = useDispatch();
   const projectContract = new ethers.Contract(id, PublicSale, provider);
 
   const updateRasiedAmounts = () => {
@@ -45,14 +47,18 @@ export function ProjectDetails() {
     return () => clearInterval(interval);
   }, []);
 
+  const updateUserTokens = () => {
+    projectContract.checkMaxTokenForUser(address).then((data) => {
+      setCanInvest(data / Math.pow(10, 18));
+    });
+    projectContract.userToTokenAmount(address).then((data) => {
+      setInvested(data / Math.pow(10, 18));
+    });
+  };
+
   React.useEffect(() => {
     if (address) {
-      projectContract.checkMaxTokenForUser(address).then((data) => {
-        setCanInvest(data / Math.pow(10, 18));
-      });
-      projectContract.userToTokenAmount(address).then((data) => {
-        setInvested(data / Math.pow(10, 18));
-      });
+      updateUserTokens();
     }
   }, [address]);
 
@@ -146,10 +152,10 @@ export function ProjectDetails() {
             {!address && <ConnectMenu></ConnectMenu>}
           </div>
         </div>
+        <p>Amount to raise: {amountToRaised}</p>
+        <p>Amount raised: {amountRaised}</p>
         {address && (
           <>
-            <p>Amount to raise: {amountToRaised}</p>
-            <p>Amount raised: {amountRaised}</p>
             <p>Invested: {invested}</p>
             <p>Can Invest: {canInvest}</p>
           </>

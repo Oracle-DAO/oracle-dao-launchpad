@@ -4,6 +4,8 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
+import { Provider } from "react-redux";
+import { SnackbarProvider } from "notistack";
 
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
@@ -12,19 +14,31 @@ import { Web3ContextProvider } from "./hooks";
 import "bootstrap/dist/css/bootstrap.css";
 import "./index.scss";
 import store from "./store/store";
-import { Provider } from "react-redux";
+import { SnackMessage } from "./components";
 
 let persistor = persistStore(store);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}></PersistGate>
-    <Web3ContextProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Web3ContextProvider>
-  </Provider>,
+  <SnackbarProvider
+    maxSnack={4}
+    anchorOrigin={{
+      vertical: "bottom",
+      horizontal: "right",
+    }}
+    content={(key, message) => (
+      <SnackMessage id={key} message={JSON.parse(message)} />
+    )}
+    autoHideDuration={10000}
+  >
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}></PersistGate>
+      <Web3ContextProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Web3ContextProvider>
+    </Provider>
+  </SnackbarProvider>,
   document.getElementById("root")
 );
 
