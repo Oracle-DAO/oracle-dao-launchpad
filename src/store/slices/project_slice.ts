@@ -67,7 +67,6 @@ export const fetchProjectDetails = createAsyncThunk("project/fetchProjectDetails
         logoImageId: allIpfsIds["logoImageId"]
     };
     const projectInfo = await loadProjectInfo(allIpfsIds["projectDetailsId"])
-
     const enabled = await projectContract.contractStatus();
     const pricipleTokenAddress = await projectContract.getProjectDetails().pricipleTokenAddress;
     const amount = await projectContract.getAmountInfo();
