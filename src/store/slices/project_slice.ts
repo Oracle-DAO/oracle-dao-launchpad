@@ -35,8 +35,9 @@ export interface IProjectSocials {
 }
 
 export interface IProjectInfo {
-    socials: IProjectSocials,
+    name: string
     description: string
+    socials: IProjectSocials,
 }
 
 export interface IProjectDetails {
@@ -67,6 +68,7 @@ export const fetchProjectDetails = createAsyncThunk("project/fetchProjectDetails
         logoImageId: allIpfsIds["logoImageId"]
     };
     const projectInfo = await loadProjectInfo(allIpfsIds["projectDetailsId"])
+    console.log(projectInfo)
     const enabled = await projectContract.contractStatus();
     const pricipleTokenAddress = await projectContract.getProjectDetails().pricipleTokenAddress;
     const amount = await projectContract.getAmountInfo();
