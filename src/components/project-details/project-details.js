@@ -153,7 +153,14 @@ export function ProjectDetails() {
         </div>
       </div>
       <div className="additional-details d-flex mt-5 flex-wrap">
-        <div className="flex-grow-1 graph"></div>
+        <div className="flex-grow-1 graph">
+          {/*<img*/}
+          {/*    // TODO fix the image size*/}
+          {/*    style={{ maxWidth: "200px", maxHeight: "200px"}}*/}
+          {/*    alt={`Project Banner`}*/}
+          {/*    src={"https://ipfs.infura.io/ipfs/" + "QmSigQ8iu5aj2w1kan4vD1f9bnFBrxyNM6ZXB2JTU2g232"}*/}
+          {/*/>*/}
+        </div>
         <div className="spacer"></div>
         <div className="screening p-4">
           <div className="d-flex align-items-center">
