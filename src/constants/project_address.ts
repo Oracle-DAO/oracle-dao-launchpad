@@ -1,3 +1,3 @@
 export const ADDRESSES: { [key: string]: string; } = {
-  "project1": "0xF0057eff08d13b395fE4b0beD8EC3c87CBEc54e8"
+  "project1": "0xA3c3dE6143b0D3D15844B4823792117d1D9611aE"
 };

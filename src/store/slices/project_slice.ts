@@ -84,14 +84,14 @@ export const fetchProjectDetails = createAsyncThunk("project/fetchProjectDetails
         projectInfo,
         enabled,
     };
-}, {
-    condition: (data, { getState, extra }) => {
-        const { projects }: any = getState();
-        const projDetails = projects[data.address];
-        if (projDetails.loading || (!projDetails.loading && !projDetails.error)) {
-            return false;
-        }
-    },
+// }, {
+//     condition: (data, { getState, extra }) => {
+//         const { projects }: any = getState();
+//         const projDetails = projects[data.address];
+//         if (projDetails.loading || (!projDetails.loading && !projDetails.error)) {
+//             return false;
+//         }
+//     },
 })
 
 export interface IProjectDetailsSlice {

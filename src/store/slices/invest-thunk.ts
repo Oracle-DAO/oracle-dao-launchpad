@@ -9,14 +9,13 @@ import { metamaskErrorWrap, getGasPrice, sleep } from "../../helpers";
 import { PublicSale, StableCoin } from "../../abis";
 
 interface IChangeApproval {
-    token: string;
     provider: StaticJsonRpcProvider | JsonRpcProvider;
     address: string;
     networkID: Networks;
     idoAddress: string;
 }
 
-export const changeApproval = createAsyncThunk("stake/changeApproval", async ({ token, provider, address, networkID, idoAddress }: IChangeApproval, { dispatch }) => {
+export const changeApproval = createAsyncThunk("invest/changeApproval", async ({provider, address, networkID, idoAddress }: IChangeApproval, { dispatch }) => {
     if (!provider) {
         dispatch(warning({ text: messages.please_connect_wallet }));
         return;
@@ -48,7 +47,6 @@ export const changeApproval = createAsyncThunk("stake/changeApproval", async ({ 
 });
 
 interface IChangeStake {
-    action: string;
     value: string;
     provider: StaticJsonRpcProvider | JsonRpcProvider;
     address: string;
@@ -56,7 +54,7 @@ interface IChangeStake {
     idoAddress: string;
 }
 
-export const changeStake = createAsyncThunk("stake/changeStake", async ({ action, value, provider, idoAddress, address, networkID }: IChangeStake, { dispatch }) => {
+export const invest = createAsyncThunk("invest/invest", async ({ value, provider, idoAddress, address, networkID }: IChangeStake, { dispatch }) => {
     if (!provider) {
         dispatch(warning({ text: messages.please_connect_wallet }));
         return;
@@ -64,19 +62,20 @@ export const changeStake = createAsyncThunk("stake/changeStake", async ({ action
     const signer = provider.getSigner();
     const publicSale = new ethers.Contract(idoAddress, PublicSale, signer);
 
-    let stakeTx;
+    let participateTx;
 
     try {
         const gasPrice = await getGasPrice(provider);
-        stakeTx = await publicSale.participate(address, ethers.utils.parseUnits(value, "gwei"), { gasPrice });
-        dispatch(fetchPendingTxns({ txnHash: stakeTx.hash, text: "Investing", type: "investing" }));
-        await stakeTx.wait();
+        participateTx = await publicSale.participate(address, ethers.utils.parseUnits(value, "ether"), { gasPrice, gasLimit:5000000 });
+        dispatch(fetchPendingTxns({ txnHash: participateTx.hash, text: "Investing", type: "investing" }));
+        await participateTx.wait();
         dispatch(success({ text: messages.tx_successfully_send }));
     } catch (err: any) {
+        console.log(err);
         return metamaskErrorWrap(err, dispatch);
     } finally {
-        if (stakeTx) {
-            dispatch(clearPendingTxn(stakeTx.hash));
+        if (participateTx) {
+            dispatch(clearPendingTxn(participateTx.hash));
         }
     }
     dispatch(info({ text: messages.your_balance_update_soon }));

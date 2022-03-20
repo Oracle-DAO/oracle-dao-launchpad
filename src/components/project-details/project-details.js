@@ -14,7 +14,7 @@ import { ConnectMenu } from "../";
 import {
   isPendingTxn,
   txnButtonText,
-  changeStake,
+  invest,
   changeApproval,
   warning,
 } from "../../store/slices";
@@ -42,32 +42,26 @@ export function ProjectDetails() {
     setQuantity(canInvest);
   };
 
-  const onSeekApproval = async (token) => {
+  const onSeekApproval = async () => {
     if (await checkWrongNetwork()) return;
-    if (quantity === "" || parseFloat(quantity) === 0) {
-      dispatch(warning({ text: "Quantity id mandatory" }));
-    } else {
       await dispatch(
         changeApproval({
           address,
           idoAddress: id,
-          token,
           provider,
           networkID: chainID,
         })
       );
-    }
   };
 
-  const onChangeStake = async (action) => {
+  const onInvest = async () => {
     if (await checkWrongNetwork()) return;
     if (quantity === "" || parseFloat(quantity) === 0) {
       dispatch(warning({ text: "Quantity id mandatory" }));
     } else {
       await dispatch(
-        changeStake({
+        invest({
           address,
-          action,
           value: String(quantity),
           provider,
           networkID: chainID,
@@ -231,37 +225,25 @@ export function ProjectDetails() {
                     <div
                       className="stake-card-tab-panel-btn"
                       onClick={() => {
-                        if (isPendingTxn(pendingTransactions, "staking"))
+                        if (isPendingTxn(pendingTransactions, "investing"))
                           return;
-                        onChangeStake("stake");
+                        onInvest();
                       }}
                     >
                       <p>
-                        {txnButtonText(
-                          pendingTransactions,
-                          "staking",
-                          "Stake ORCL"
-                        )}
+                        {txnButtonText(pendingTransactions, "investing", "Invest")}
                       </p>
                     </div>
                   ) : (
                     <div
                       className="stake-card-tab-panel-btn"
                       onClick={() => {
-                        if (
-                          isPendingTxn(pendingTransactions, "approve_staking")
-                        )
+                        if (isPendingTxn(pendingTransactions, "approve_investment"))
                           return;
-                        onSeekApproval("ORCL");
+                        onSeekApproval();
                       }}
                     >
-                      <p>
-                        {txnButtonText(
-                          pendingTransactions,
-                          "approve_staking",
-                          "Approve"
-                        )}
-                      </p>
+                      <p>{txnButtonText(pendingTransactions, "approve_investment", "Approve")}</p>
                     </div>
                   )}
                 </div>
