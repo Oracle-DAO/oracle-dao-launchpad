@@ -1,18 +1,18 @@
 import "./home.scss";
 import * as React from "react";
-import { useNavigate } from "react-router-dom";
-import { Button, Grid, Box } from "@mui/material";
-import { Language, Twitter, Telegram, GitHub } from "@mui/icons-material";
+import {useNavigate} from "react-router-dom";
+import {Box, Button, Grid} from "@mui/material";
+import {Cancel, CheckCircle, GitHub, Language, Telegram, Twitter} from "@mui/icons-material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { useProject } from "../../hooks";
-import { ADDRESSES } from "../../constants";
+import {useProject} from "../../hooks";
 
 export function MenuInterface() {
     const [activeTab, setActiveTab] = React.useState("two");
     const handleChange = (id: any) => {
         setActiveTab(id);
     };
+    const {ongoing, upcoming, ended} = useProject();
     return (
         <>
             <div className="headline-root">
@@ -22,16 +22,16 @@ export function MenuInterface() {
                             <p>What is Oracle Finance?</p>
                             <p>
                                 A Financial Platform To Facilitate
-                                <br />A Multitude Of Cryptocurrency
-                                <br />
+                                <br/>A Multitude Of Cryptocurrency
+                                <br/>
                                 Investing
                             </p>
                             <div>
                                 <p>
                                     Oracle is a community-governed, yield generating
-                                    <br />
+                                    <br/>
                                     deflationary protocol that is built for sustainable
-                                    <br />
+                                    <br/>
                                     growth in any market condition
                                 </p>
                             </div>
@@ -70,29 +70,72 @@ export function MenuInterface() {
                     </ul>
                 </div>
             </div>
-            <Grid container justifyContent="center" spacing={5} marginBottom={5}>
-                {Object.keys(ADDRESSES).map((value) => {
-                    return (
-                        <Grid item xs={10} sm={8} md={6} lg={4} key={value}>
-                            <LaunchpadHome address={ADDRESSES[value]} />
+            {activeTab === "one" ? (
+                    <Grid container justifyContent="center" spacing={5} marginBottom={5}>
+                        {Object.keys(upcoming).map((value) => {
+                            return (
+                                <Grid item xs={10} sm={8} md={6} lg={4} key={value}>
+                                    <LaunchpadHome project={upcoming[value]}/>
+                                </Grid>
+                            );
+                        })}
+                    </Grid>
+                ) :
+                <>
+                    {activeTab === "two" ? (
+                        <Grid container justifyContent="center" spacing={5} marginBottom={5}>
+                            {Object.keys(ongoing).map((value) => {
+                                return (
+                                    <Grid item xs={10} sm={8} md={6} lg={4} key={value}>
+                                        <LaunchpadHome project={ongoing[value]}/>
+                                    </Grid>
+                                );
+                            })}
                         </Grid>
-                    );
-                })}
-            </Grid>
+                    ) : (
+                        <Grid container justifyContent="center" spacing={5} marginBottom={5}>
+                            {Object.keys(ended).map((value) => {
+                                return (
+                                    <Grid item xs={10} sm={8} md={6} lg={4} key={value}>
+                                        <LaunchpadHome project={ended[value]}/>
+                                    </Grid>
+                                );
+                            })}
+                        </Grid>
+                    )
+                    }
+                </>
+            }
         </>
     );
 }
 
 function LaunchpadHome(props: any) {
-    const { project } = useProject(props.address);
+    // const project = useSelector<IReduxState, IProjectDetailsSlice>((state) => {
+    //     return state.projects;
+    // });
     const [value, setValue] = React.useState("one");
     const handleChange = (event: any, newValue: any) => {
         setValue(newValue);
     };
     let navigate = useNavigate();
     const showProjectDetail = () => {
-        navigate(`/project-details/${props.address}`);
+        navigate(`/project-details/${props.project.address}`);
     };
+    const [counter, setCounter] = React.useState("");
+    let tokenPrice = "";
+    if (!props.project.loading) {
+        setInterval(() => {
+            const distance = props.project.projectTime[0] - Math.round((new Date()).getTime() / 1000);
+            const days = Math.floor(distance / (60 * 60 * 24));
+            const hours = Math.floor((distance % (60 * 60 * 24)) / (60 * 60));
+            const minutes = Math.floor((distance % (60 * 60)) / (60));
+            const seconds = Math.floor((distance % (60)));
+            setCounter(days + "d " + hours + "h " + minutes + "m " + seconds + "s");
+        }, 1000);
+        // tokenPrice  = "$" + parseInt(props.project.amount[1].hex,16)/Math.pow(10,18)
+        tokenPrice = "$" + props.project.amount[0] / Math.pow(10, 18)
+    }
     return (
         <div className="card-root">
             <img
@@ -104,22 +147,22 @@ function LaunchpadHome(props: any) {
                 <Grid container justifyContent="flex-start" spacing={1}>
                     <Grid item xs={2}>
                         <Button>
-                            <Language />
+                            <Language/>
                         </Button>
                     </Grid>
                     <Grid item xs={2}>
                         <Button>
-                            <Twitter />
+                            <Twitter/>
                         </Button>
                     </Grid>
                     <Grid item xs={2}>
                         <Button>
-                            <Telegram />
+                            <Telegram/>
                         </Button>
                     </Grid>
                     <Grid item xs={2}>
                         <Button>
-                            <GitHub />
+                            <GitHub/>
                         </Button>
                     </Grid>
                 </Grid>
@@ -132,9 +175,9 @@ function LaunchpadHome(props: any) {
                     indicatorColor="secondary"
                     aria-label="secondary tabs"
                 >
-                    <Tab value="one" label="Offering" />
-                    <Tab value="two" label="Screening" />
-                    <Tab value="three" label="Description" />
+                    <Tab value="one" label="Offering"/>
+                    <Tab value="two" label="Screening"/>
+                    <Tab value="three" label="Description"/>
                 </Tabs>
             </div>
             {value === "one" ? (
@@ -143,11 +186,11 @@ function LaunchpadHome(props: any) {
                         <p>{props.title}</p>
                         <div className="content-spacing">
                             <p className="content-text-title">Registration Opens</p>
-                            <p className="content-time">23h 58m 36s</p>
+                            <p className="content-time">{counter}</p>
                         </div>
                         <div className="content-spacing">
                             <p className="content-text-title">PUBLIC Total Raise</p>
-                            <p className="content-text">$150,000</p>
+                            <p className="content-text">{tokenPrice}</p>
                         </div>
                         <div className="content-spacing">
                             <p className="content-text-title">
@@ -157,9 +200,42 @@ function LaunchpadHome(props: any) {
                         </div>
                     </div>
                 </div>
-            ) : (
-                <div></div>
-            )}
+            ) : <>
+                {value === "two" ? (
+                        <div className="content">
+                            <div className="d-flex flex-row">
+                                <CheckCircle color="success" className="me-3"/>
+                                <p className="text-white">
+                                    Metrics advised by Oracle Finance
+                                </p>
+                            </div>
+                            <div className="d-flex flex-row ">
+                                <Cancel color="error" className="me-3"/>
+                                <p className="text-white">
+                                    Controlled Cap Table
+                                </p>
+                            </div>
+                        </div>
+                    )
+                    : (
+                        <div className="content">
+                            <div className="d-flex flex-row">
+                                <CheckCircle color="success" className="me-3"/>
+                                <p className="text-white">
+                                    Metrics advised by Oracle Finance
+                                </p>
+                            </div>
+                            <div className="d-flex flex-row ">
+                                <Cancel color="error" className="me-3"/>
+                                <p className="text-white">
+                                    Controlled Cap Table
+                                </p>
+                            </div>
+                        </div>
+                    )
+                }
+            </>
+            }
             <div className="button-div">
                 <button className="research" type="button" onClick={showProjectDetail}>
                     Research

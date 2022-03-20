@@ -1,8 +1,8 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { JsonRpcProvider, StaticJsonRpcProvider } from "@ethersproject/providers";
-import { Networks } from "../../constants";
-import { PublicSale } from "../../abis";
-import { ethers } from "ethers";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {JsonRpcProvider, StaticJsonRpcProvider} from "@ethersproject/providers";
+import {Networks} from "../../constants";
+import {PublicSale} from "../../abis";
+import {ethers} from "ethers";
 
 
 export interface IProjectTime {
@@ -37,15 +37,26 @@ interface ICalcProjectDetails {
     address: string;
 }
 
-export const fetchProjectDetails = createAsyncThunk("project/fetchProjectDetails", async ({ provider, networkID, address }: ICalcProjectDetails, { dispatch }) => {
+export const fetchProjectDetails = createAsyncThunk("project/fetchProjectDetails", async ({
+                                                                                              provider,
+                                                                                              networkID,
+                                                                                              address
+                                                                                          }: ICalcProjectDetails, {dispatch}) => {
 
     const projectContract = new ethers.Contract(address, PublicSale, provider);
+    // console.log(projectContract);
     const ipfsId = await projectContract.getIpfsId();
+    // console.log(ipfsId);
     const enabled = await projectContract.contractStatus();
+    // console.log(enabled);
     const pricipleTokenAddress = await projectContract.getProjectDetails().pricipleTokenAddress;
+    // console.log(pricipleTokenAddress);
     const amount = await projectContract.getAmountInfo();
+    // console.log(amount);
     const tokenInfo = await projectContract.getTokenInfo();
+    // console.log(tokenInfo);
     const projectTime = await projectContract.getProjectTimeInfo();
+    // console.log(projectTime);
 
     return {
         address: address,
@@ -56,15 +67,16 @@ export const fetchProjectDetails = createAsyncThunk("project/fetchProjectDetails
         pricipleTokenAddress,
         enabled,
     };
-}, {
-    condition: (data, { getState, extra }) => {
-        const { projects }: any = getState();
-        const projDetails = projects[data.address];
-        if (projDetails.loading || (!projDetails.loading && !projDetails.error)) {
-            return false;
-        }
-    },
 })
+//,{
+//     condition: (data, { getState, extra }) => {
+//         const { projects }: any = getState();
+//         const projDetails = projects[data.address];
+//         if (projDetails.loading || (!projDetails.loading && !projDetails.error)) {
+//             return false;
+//         }
+//     },
+// }
 
 export interface IProjectDetailsSlice {
     [key: string]: any;
@@ -104,4 +116,4 @@ const projectSlice = createSlice({
 
 export default projectSlice.reducer;
 
-export const { fetchProjectDetailSuccess } = projectSlice.actions;
+export const {fetchProjectDetailSuccess} = projectSlice.actions;
