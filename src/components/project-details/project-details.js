@@ -1,8 +1,9 @@
 import * as React from "react";
 import { useParams } from "react-router-dom";
 import { ethers } from "ethers";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
+import { OutlinedInput, InputAdornment } from "@mui/material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import LinearProgress from "@mui/material/LinearProgress";
@@ -10,6 +11,13 @@ import LinearProgress from "@mui/material/LinearProgress";
 import { useProject, useWeb3Context } from "../../hooks";
 import { PublicSale } from "../../abis";
 import { ConnectMenu } from "../";
+import {
+  isPendingTxn,
+  txnButtonText,
+  changeStake,
+  changeApproval,
+  warning,
+} from "../../store/slices";
 import "./project-details.scss";
 
 export function ProjectDetails() {
@@ -19,12 +27,60 @@ export function ProjectDetails() {
   const [amountRaised, setAmountRaised] = React.useState(0);
   const [invested, setInvested] = React.useState(0);
   const [canInvest, setCanInvest] = React.useState(0);
+  const [quantity, setQuantity] = React.useState("");
 
   let { id } = useParams();
   const { project } = useProject(id);
-  const { provider, address } = useWeb3Context();
+  const { provider, address, chainID, checkWrongNetwork } = useWeb3Context();
   const dispatch = useDispatch();
   const projectContract = new ethers.Contract(id, PublicSale, provider);
+  const pendingTransactions = useSelector((state) => {
+    return state.pendingTransactions;
+  });
+
+  const setMax = () => {
+    setQuantity(canInvest);
+  };
+
+  const onSeekApproval = async (token) => {
+    if (await checkWrongNetwork()) return;
+    if (quantity === "" || parseFloat(quantity) === 0) {
+      dispatch(warning({ text: "Quantity id mandatory" }));
+    } else {
+      await dispatch(
+        changeApproval({
+          address,
+          idoAddress: id,
+          token,
+          provider,
+          networkID: chainID,
+        })
+      );
+    }
+  };
+
+  const onChangeStake = async (action) => {
+    if (await checkWrongNetwork()) return;
+    if (quantity === "" || parseFloat(quantity) === 0) {
+      dispatch(warning({ text: "Quantity id mandatory" }));
+    } else {
+      await dispatch(
+        changeStake({
+          address,
+          action,
+          value: String(quantity),
+          provider,
+          networkID: chainID,
+          idoAddress: id,
+        })
+      );
+      setQuantity("");
+    }
+  };
+
+  const hasAllowance = React.useCallback(() => {
+    return canInvest > 0;
+  }, [canInvest]);
 
   const updateRasiedAmounts = () => {
     projectContract.getAmountInfo().then((data) => {
@@ -61,8 +117,6 @@ export function ProjectDetails() {
       updateUserTokens();
     }
   }, [address]);
-
-  const invest = () => {};
 
   return (
     <div className="project-details-wrapper">
@@ -145,9 +199,66 @@ export function ProjectDetails() {
           </div>
           <div className="ms-3">
             {address && (
-              <button className="invest-button" type="button" onClick={invest}>
-                Invest
-              </button>
+              <>
+                <OutlinedInput
+                  type="number"
+                  placeholder="Amount"
+                  className="stake-card-action-input"
+                  value={quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
+                  labelWidth={0}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <div
+                        onClick={setMax}
+                        className="stake-card-action-input-btn"
+                      >
+                        <p>Max</p>
+                      </div>
+                    </InputAdornment>
+                  }
+                />
+
+                <div className="stake-card-tab-panel">
+                  {address && hasAllowance() ? (
+                    <div
+                      className="stake-card-tab-panel-btn"
+                      onClick={() => {
+                        if (isPendingTxn(pendingTransactions, "staking"))
+                          return;
+                        onChangeStake("stake");
+                      }}
+                    >
+                      <p>
+                        {txnButtonText(
+                          pendingTransactions,
+                          "staking",
+                          "Stake ORCL"
+                        )}
+                      </p>
+                    </div>
+                  ) : (
+                    <div
+                      className="stake-card-tab-panel-btn"
+                      onClick={() => {
+                        if (
+                          isPendingTxn(pendingTransactions, "approve_staking")
+                        )
+                          return;
+                        onSeekApproval("ORCL");
+                      }}
+                    >
+                      <p>
+                        {txnButtonText(
+                          pendingTransactions,
+                          "approve_staking",
+                          "Approve"
+                        )}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </>
             )}
             {!address && <ConnectMenu></ConnectMenu>}
           </div>
