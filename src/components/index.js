@@ -3,3 +3,5 @@ export * from "./footer";
 export * from "./header/header";
 export * from "./home/home";
 export * from "./project-details/project-details";
+export * from "./messages/index";
+export * from "./messages/snackbar";

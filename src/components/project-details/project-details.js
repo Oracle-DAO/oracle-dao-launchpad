@@ -1,6 +1,7 @@
 import * as React from "react";
 import {useParams} from "react-router-dom";
 import {ethers} from "ethers";
+import { useDispatch } from "react-redux";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import LinearProgress from "@mui/material/LinearProgress";
@@ -21,7 +22,7 @@ export function ProjectDetails() {
     let {id} = useParams();
     // const { project } = useProject(id);  Need to change this to get project details.
     const {provider, address} = useWeb3Context();
-
+  const dispatch = useDispatch();
     const projectContract = new ethers.Contract(id, PublicSale, provider);
 
     const updateRasiedAmounts = () => {
@@ -45,14 +46,17 @@ export function ProjectDetails() {
         return () => clearInterval(interval);
     }, []);
 
-    React.useEffect(() => {
-        if (address) {
+    const updateUserTokens = () =>{
             projectContract.checkMaxTokenForUser(address).then((data) => {
                 setCanInvest(data / Math.pow(10, 18));
             });
             projectContract.userToTokenAmount(address).then((data) => {
                 setInvested(data / Math.pow(10, 18));
-            });
+            });};
+
+  React.useEffect(() => {
+    if (address) {
+      updateUserTokens();
         }
     }, [address]);
 
@@ -94,7 +98,14 @@ export function ProjectDetails() {
                 </div>
             </div>
             <div className="additional-details d-flex mt-5 flex-wrap">
-                <div className="flex-grow-1 graph"></div>
+                <div className="flex-grow-1 graph">
+          {/*<img*/}
+          {/*    // TODO fix the image size*/}
+          {/*    style={{ maxWidth: "200px", maxHeight: "200px"}}*/}
+          {/*    alt={`Project Banner`}*/}
+          {/*    src={"https://ipfs.infura.io/ipfs/" + "QmSigQ8iu5aj2w1kan4vD1f9bnFBrxyNM6ZXB2JTU2g232"}*/}
+          {/*/>*/}
+        </div>
                 <div className="spacer"></div>
                 <div className="screening p-4">
                     <div className="d-flex align-items-center">
@@ -147,10 +158,10 @@ export function ProjectDetails() {
                         {!address && <ConnectMenu></ConnectMenu>}
                     </div>
                 </div>
-                {address && (
-                    <>
+
                         <p>Amount to raise: {amountToRaised}</p>
-                        <p>Amount raised: {amountRaised}</p>
+                        <p>Amount raised: {amountRaised}</p>{address && (
+          <>
                         <p>Invested: {invested}</p>
                         <p>Can Invest: {canInvest}</p>
                     </>

@@ -3,7 +3,7 @@ import {JsonRpcProvider, StaticJsonRpcProvider} from "@ethersproject/providers";
 import {Networks} from "../../constants";
 import {PublicSale} from "../../abis";
 import {ethers} from "ethers";
-
+import {loadIpfsIdPerProject, loadProjectInfo} from "../../helpers/get_ipfs_ids";
 
 export interface IProjectTime {
     startTime: number;
@@ -21,13 +21,33 @@ export interface IAmountInfo {
     totalAmountRaised: string;
 }
 
+export interface IImageIpfsIds {
+    bannerImageId: string;
+    logoImageId: string;
+}
+
+export interface IProjectSocials {
+    website: string,
+    telegram: string,
+    twitter: string,
+    discord: string,
+    github: string
+}
+
+export interface IProjectInfo {
+    name: string
+    description: string
+    socials: IProjectSocials,
+}
+
 export interface IProjectDetails {
     projectAddress: string,
     amount: IAmountInfo;
     tokenInfo: ITokenInfo;
     projectTime: IProjectTime;
-    ipfsId: string;
     pricipleTokenAddress: string;
+    imageIpfsIds: IImageIpfsIds;
+    projectInfo: IProjectInfo;
     enabled: boolean;
 }
 
@@ -44,27 +64,28 @@ export const fetchProjectDetails = createAsyncThunk("project/fetchProjectDetails
                                                                                           }: ICalcProjectDetails, {dispatch}) => {
 
     const projectContract = new ethers.Contract(address, PublicSale, provider);
-    // console.log(projectContract);
     const ipfsId = await projectContract.getIpfsId();
-    // console.log(ipfsId);
+    const allIpfsIds = await loadIpfsIdPerProject(ipfsId);
+
+    const imageIpfsId : IImageIpfsIds  = {
+        bannerImageId : allIpfsIds["bannerImageId"],
+        logoImageId: allIpfsIds["logoImageId"]
+    };
+    const projectInfo = await loadProjectInfo(allIpfsIds["projectDetailsId"]);
     const enabled = await projectContract.contractStatus();
-    // console.log(enabled);
     const pricipleTokenAddress = await projectContract.getProjectDetails().pricipleTokenAddress;
-    // console.log(pricipleTokenAddress);
     const amount = await projectContract.getAmountInfo();
-    // console.log(amount);
     const tokenInfo = await projectContract.getTokenInfo();
-    // console.log(tokenInfo);
     const projectTime = await projectContract.getProjectTimeInfo();
-    // console.log(projectTime);
 
     return {
         address: address,
         amount,
         tokenInfo,
         projectTime,
-        ipfsId,
         pricipleTokenAddress,
+        imageIpfsId,
+        projectInfo,
         enabled,
     };
 })

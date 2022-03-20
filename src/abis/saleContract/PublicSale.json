@@ -19,6 +19,11 @@
         },
         {
           "internalType": "uint256",
+          "name": "totalAmountToRaise_",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
           "name": "totalTokenSupply_",
           "type": "uint256"
         },
@@ -41,6 +46,11 @@
           "internalType": "uint32",
           "name": "endTime_",
           "type": "uint32"
+        },
+        {
+          "internalType": "string",
+          "name": "ipfsId_",
+          "type": "string"
         }
       ],
       "stateMutability": "nonpayable",
