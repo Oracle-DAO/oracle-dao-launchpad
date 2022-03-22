@@ -20,36 +20,34 @@ export function useProject() {
         return state.projects;
     });
 
-
     useEffect(() => {
         //Seperation Logic
-
-        let ongoing_random = <IProjectList>{};
-        let upcoming_random = <IProjectList>{};
-        let ended_random = <IProjectList>{};
+        let ongoing = <IProjectList>{};
+        let upcoming = <IProjectList>{};
+        let ended = <IProjectList>{};
 
         Object.values(projectDetails).map(project => {
-            console.log(project);
-            if (project.projectTime[0] - Math.round((new Date()).getTime() / 1000) < 0
-                &&
+            if(project.loading){
+                return;
+            }
+
+            if (project.projectTime[0] - Math.round((new Date()).getTime() / 1000) < 0 &&
                 project.projectTime[1] - Math.round((new Date()).getTime() / 1000) > 0 && project.enabled) {
-                ongoing_random[project.address] = project;
+                ongoing[project.address] = project;
             } else if (project.projectTime[0] - Math.round((new Date()).getTime() / 1000) > 0 && project.enabled) {
-                upcoming_random[project.address] = project;
+                upcoming[project.address] = project;
             } else if (project.projectTime[1] - Math.round((new Date()).getTime() / 1000) < 0 && project.enabled) {
-                ended_random[project.address] = project;
+                ended[project.address] = project;
             } else {
                 console.log("error");
             }
         });
 
-
         //Sorting logic
 
-
-        setOngoing(ongoing_random);
-        setUpcoming(upcoming_random);
-        setEnded(ended_random);
+        setOngoing(ongoing);
+        setUpcoming(upcoming);
+        setEnded(ended);
     }, [projectDetails]);
 
     return {ongoing, upcoming, ended};
