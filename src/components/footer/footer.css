@@ -1,0 +1,35 @@
+footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1rem;
+}
+
+footer .logo {
+    height: 36px;
+    width: 140px;
+    background-image: url("../../assets/svg/logo.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+footer .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+    font-family: "Poppins", sans-serif;
+    letter-spacing: 0.1em;
+    line-height: 32px;
+}
+footer .list-group-item {
+    background: transparent;
+    border: none;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.copyright {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 15px;
+    letter-spacing: 0.1em;
+    line-height: 32px;
+    padding: 1rem;
+    margin: 0;
+}
