@@ -9,16 +9,17 @@ import Tab from "@mui/material/Tab";
 import LinearProgress from "@mui/material/LinearProgress";
 
 import { useProject, useWeb3Context } from "../../hooks";
-import { PublicSale } from "../../abis";
+import {PublicSale, StableCoin} from "../../abis";
 import { ConnectMenu } from "../";
 import {
   isPendingTxn,
   txnButtonText,
   invest,
   changeApproval,
-  warning,
+  warning, hasAllowance,
 } from "../../store/slices";
 import "./project-details.scss";
+import {getAddress, messages} from "../../constants";
 
 export function ProjectDetails() {
   const [activeTab, setactiveTab] = React.useState("p-details");
@@ -27,6 +28,7 @@ export function ProjectDetails() {
   const [amountRaised, setAmountRaised] = React.useState(0);
   const [invested, setInvested] = React.useState(0);
   const [canInvest, setCanInvest] = React.useState(0);
+  const [allowance, setAllowance] = React.useState(false);
   const [quantity, setQuantity] = React.useState("");
 
   let { id } = useParams();
@@ -34,6 +36,7 @@ export function ProjectDetails() {
   const { provider, address, chainID, checkWrongNetwork } = useWeb3Context();
   const dispatch = useDispatch();
   const projectContract = new ethers.Contract(id, PublicSale, provider);
+  const stableCoinContract = new ethers.Contract(getAddress("STABLE_COIN_ADDRESS"), StableCoin, provider);
   const pendingTransactions = useSelector((state) => {
     return state.pendingTransactions;
   });
@@ -72,9 +75,15 @@ export function ProjectDetails() {
     }
   };
 
-  const hasAllowance = React.useCallback(() => {
-    return canInvest > 0;
-  }, [canInvest]);
+  const checkAllowance = () => {
+    if (!provider) {
+      dispatch(warning({ text: messages.please_connect_wallet }));
+      return;
+    }
+    return stableCoinContract.allowance(address, id).then((data) => {
+      return setAllowance(data > 0);
+    });
+  }
 
   const updateRasiedAmounts = () => {
     projectContract.getAmountInfo().then((data) => {
@@ -109,6 +118,7 @@ export function ProjectDetails() {
   React.useEffect(() => {
     if (address) {
       updateUserTokens();
+      checkAllowance();
     }
   }, [address]);
 
@@ -219,9 +229,8 @@ export function ProjectDetails() {
                     </InputAdornment>
                   }
                 />
-
                 <div className="stake-card-tab-panel">
-                  {address && hasAllowance() ? (
+                  {address && allowance ? (
                     <div
                       className="stake-card-tab-panel-btn"
                       onClick={() => {
@@ -278,34 +287,8 @@ export function ProjectDetails() {
         </div>
         {activeTab === "p-details" && (
           <div className="d-flex flex-wrap">
-            <div className="mt-4 flex-grow-1">
-              <table>
-                <thead>
-                  <tr>
-                    <th colSpan="2">Pool Information</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Opens</td>
-                    <td>2021-12-02 08:00:00 UTC</td>
-                  </tr>
-                  <tr>
-                    <td>Opens</td>
-                    <td>2021-12-02 08:00:00 UTC</td>
-                  </tr>
-                  <tr>
-                    <td>Opens</td>
-                    <td>2021-12-02 08:00:00 UTC</td>
-                  </tr>
-                  <tr>
-                    <td>Opens</td>
-                    <td>2021-12-02 08:00:00 UTC</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div className="spacer"></div>
+
+            {/*<div className="spacer"></div>*/}
             <div className="mt-4 flex-grow-1">
               <table>
                 <thead>
@@ -331,7 +314,61 @@ export function ProjectDetails() {
             </div>
           </div>
         )}
-        {activeTab === "schedule" && <div>Schedule</div>}
+        {activeTab === "schedule" && (
+            <div className="d-flex flex-wrap">
+          <div className="mt-4 flex-grow-1">
+            <table>
+              <thead>
+              <tr>
+                <th colSpan="2">Pool Information</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>Opens</td>
+                <td>2021-12-02 08:00:00 UTC</td>
+              </tr>
+              <tr>
+                <td>Opens</td>
+                <td>2021-12-02 08:00:00 UTC</td>
+              </tr>
+              <tr>
+                <td>Opens</td>
+                <td>2021-12-02 08:00:00 UTC</td>
+              </tr>
+              <tr>
+                <td>Opens</td>
+                <td>2021-12-02 08:00:00 UTC</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className="spacer"></div>
+          <div className="mt-4 flex-grow-1">
+            <table>
+              <thead>
+              <tr>
+                <th colSpan="2">Token information</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>Name</td>
+                <td>Operon Origins</td>
+              </tr>
+              <tr>
+                <td>Token Symbol</td>
+                <td>ORO</td>
+              </tr>
+              <tr>
+                <td>Total Supply </td>
+                <td>1000000</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        )}
         {activeTab === "alloc" && <div>Your Allocation</div>}
       </div>
     </div>
