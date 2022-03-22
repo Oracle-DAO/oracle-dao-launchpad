@@ -33,13 +33,10 @@ export function useProject() {
             if (project.projectTime[0] - Math.round((new Date()).getTime() / 1000) < 0
                 &&
                 project.projectTime[1] - Math.round((new Date()).getTime() / 1000) > 0 && project.enabled) {
-                console.log("ongoing");
                 ongoing_random[project.address] = project;
             } else if (project.projectTime[0] - Math.round((new Date()).getTime() / 1000) > 0 && project.enabled) {
-                console.log("upcoming");
                 upcoming_random[project.address] = project;
             } else if (project.projectTime[1] - Math.round((new Date()).getTime() / 1000) < 0 && project.enabled) {
-                console.log("ended");
                 ended_random[project.address] = project;
             } else {
                 console.log("error");

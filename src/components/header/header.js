@@ -7,23 +7,13 @@ import "./header.css";
 const links = [
   {
     id: 1,
-    text: "Flowchart",
+    text: "Oracle",
     path: "/",
   },
   {
     id: 2,
-    text: "Roadmap",
+    text: "How it Works",
     path: "/stake",
-  },
-  {
-    id: 3,
-    text: "Team",
-    path: "/hub",
-  },
-  {
-    id: 4,
-    text: "ContactUs",
-    path: "/hub",
   },
 ];
 
@@ -42,7 +32,7 @@ function CustomLink({ children, to, ...props }) {
 
 export const Header = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark copyright">
+    <nav className="navbar navbar-expand-lg navbar-dark">
       <div className="container-fluid">
         <a className="navbar-brand" href="/">
           <Logo />

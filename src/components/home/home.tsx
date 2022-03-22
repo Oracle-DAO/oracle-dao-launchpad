@@ -41,7 +41,6 @@ export function MenuInterface() {
                 <Box className="headline-right-box">
                     <img
                         src="https://shortpixel.com/img/slider/berries-optimized-by-shortpixel.jpg"
-                        alt="Potato"
                         className="headline-img"
                     />
                 </Box>
@@ -111,9 +110,6 @@ export function MenuInterface() {
 }
 
 function LaunchpadHome(props: any) {
-    // const project = useSelector<IReduxState, IProjectDetailsSlice>((state) => {
-    //     return state.projects;
-    // });
     const [value, setValue] = React.useState("one");
     const handleChange = (event: any, newValue: any) => {
         setValue(newValue);
@@ -122,49 +118,66 @@ function LaunchpadHome(props: any) {
     const showProjectDetail = () => {
         navigate(`/project-details/${props.project.address}`);
     };
-    const [counter, setCounter] = React.useState("");
+    console.log(props);
     let tokenPrice = "";
+    let startDistance = props.project.projectTime[0] - Math.round((new Date()).getTime() / 1000);
+    let endDistance = props.project.projectTime[1] - Math.round((new Date()).getTime() / 1000);
+
+    const [counter, setCounter] = React.useState("");
     if (!props.project.loading) {
-        setInterval(() => {
-            const distance = props.project.projectTime[0] - Math.round((new Date()).getTime() / 1000);
+        setTimeout(() => {
+            let distance = 0;
+            if (endDistance > 0 && startDistance > 0) {
+                 distance = props.project.projectTime[0] - Math.round((new Date()).getTime() / 1000);
+                 startDistance = distance;
+            } else if(endDistance > 0 && startDistance > 0) {
+                 distance = props.project.projectTime[1] - Math.round((new Date()).getTime() / 1000);
+                 endDistance = distance;
+            }
+            else {
+                clearTimeout();
+            }
             const days = Math.floor(distance / (60 * 60 * 24));
             const hours = Math.floor((distance % (60 * 60 * 24)) / (60 * 60));
             const minutes = Math.floor((distance % (60 * 60)) / (60));
             const seconds = Math.floor((distance % (60)));
             setCounter(days + "d " + hours + "h " + minutes + "m " + seconds + "s");
         }, 1000);
-        // tokenPrice  = "$" + parseInt(props.project.amount[1].hex,16)/Math.pow(10,18)
-        tokenPrice = "$" + props.project.amount[0] / Math.pow(10, 18)
+        tokenPrice = "$" + props.project.amount[0] / Math.pow(10, 18);
     }
     return (
         <div className="card-root">
             <img
-                src="https://shortpixel.com/img/slider/berries-optimized-by-shortpixel.jpg"
-                alt="Potato"
+                src={"https://ipfs.infura.io/ipfs/" + props.project.imageIpfsId.bannerImageId}
                 className="img"
             />
             <div className="icons">
                 <Grid container justifyContent="flex-start" spacing={1}>
-                    <Grid item xs={2}>
-                        <Button>
-                            <Language/>
-                        </Button>
-                    </Grid>
-                    <Grid item xs={2}>
-                        <Button>
-                            <Twitter/>
-                        </Button>
-                    </Grid>
-                    <Grid item xs={2}>
-                        <Button>
-                            <Telegram/>
-                        </Button>
-                    </Grid>
-                    <Grid item xs={2}>
-                        <Button>
-                            <GitHub/>
-                        </Button>
-                    </Grid>
+                    {typeof (props.project.projectInfo.socials.website) !== "undefined" ? (
+                        <Grid item xs={2}>
+                            <Button href={props.project.projectInfo.socials.website}>
+                                <Language/>
+                            </Button>
+                        </Grid>) : <></>}
+                    {typeof (props.project.projectInfo.socials.twitter) != "undefined" ? (
+                        <Grid item xs={2}>
+                            <Button href={props.project.projectInfo.socials.twitter}>
+                                <Twitter/>
+                            </Button>
+                        </Grid>) : <></>}
+                    {typeof (props.project.projectInfo.socials.telegram) != "undefined" ? (
+                        <Grid item xs={2}>
+                            <Button href={props.project.projectInfo.socials.telegram}>
+                                <Telegram/>
+                            </Button>
+                        </Grid>) : <></>}
+                    {typeof (props.project.projectInfo.socials.github) != "undefined" ? (
+                        <Grid item xs={2}>
+                            <Button href={props.project.projectInfo.socials.github}>
+                                <GitHub/>
+                            </Button>
+                        </Grid>
+                    ) : <></>}
                 </Grid>
             </div>
             <div className="tabs">
@@ -183,11 +196,25 @@ function LaunchpadHome(props: any) {
             {value === "one" ? (
                 <div className="content">
                     <div>
-                        <p>{props.title}</p>
-                        <div className="content-spacing">
-                            <p className="content-text-title">Registration Opens</p>
-                            <p className="content-time">{counter}</p>
-                        </div>
+                        <p>{props.project.projectInfo.name}</p>
+                        {startDistance > 0 && endDistance > 0 ? (
+                                <div className="content-spacing">
+                                    <p className="content-text-title">Registration Opens</p>
+                                    <p className="content-time">{counter}</p>
+                                </div>) :
+                            <>
+                                {startDistance < 0 && endDistance > 0 ? (
+                                        <div className="content-spacing">
+                                            <p className="content-text-title">Registration Closes</p>
+                                            <p className="content-time">CLOSED</p>
+                                        </div>) :
+                                    <div className="content-spacing">
+                                        <p className="content-text-title">Registration Closed</p>
+                                        <p className="content-time">CLOSED</p>
+                                    </div>
+                                }
+                            </>
+                        }
                         <div className="content-spacing">
                             <p className="content-text-title">PUBLIC Total Raise</p>
                             <p className="content-text">{tokenPrice}</p>
@@ -219,18 +246,7 @@ function LaunchpadHome(props: any) {
                     )
                     : (
                         <div className="content">
-                            <div className="d-flex flex-row">
-                                <CheckCircle color="success" className="me-3"/>
-                                <p className="text-white">
-                                    Metrics advised by Oracle Finance
-                                </p>
-                            </div>
-                            <div className="d-flex flex-row ">
-                                <Cancel color="error" className="me-3"/>
-                                <p className="text-white">
-                                    Controlled Cap Table
-                                </p>
-                            </div>
+                            <p className="text-white">{props.project.projectInfo.description}</p>
                         </div>
                     )
                 }
