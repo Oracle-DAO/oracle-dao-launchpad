@@ -131,7 +131,6 @@ function LaunchpadHome(props: any) {
     const showProjectDetail = () => {
         navigate(`/project-details/${props.project.address}`);
     };
-    console.log(props);
     let tokenPrice = "";
     let startDistance = props.project.projectTime[0] - Math.round((new Date()).getTime() / 1000);
     let endDistance = props.project.projectTime[1] - Math.round((new Date()).getTime() / 1000);
