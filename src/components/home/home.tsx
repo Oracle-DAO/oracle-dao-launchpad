@@ -133,7 +133,6 @@ function LaunchpadHome(props: any) {
     const showProjectDetail = () => {
         navigate(`/project-details/${props.project.address}`);
     };
-    console.log(props);
     let tokenPrice = "";
     let startDistance = props.project.projectTime[0] - Math.round((new Date()).getTime() / 1000);
     let endDistance = props.project.projectTime[1] - Math.round((new Date()).getTime() / 1000);
@@ -145,7 +144,7 @@ function LaunchpadHome(props: any) {
             if (endDistance > 0 && startDistance > 0) {
                 distance = props.project.projectTime[0] - Math.round((new Date()).getTime() / 1000);
                 startDistance = distance;
-            } else if (endDistance > 0 && startDistance > 0) {
+            } else if (endDistance > 0 && startDistance < 0) {
                 distance = props.project.projectTime[1] - Math.round((new Date()).getTime() / 1000);
                 endDistance = distance;
             }
@@ -216,13 +215,13 @@ function LaunchpadHome(props: any) {
                         {startDistance > 0 && endDistance > 0 ? (
                             <div className="content-spacing">
                                 <p className="content-text-title">Registration Opens</p>
-                                <p className="content-time">{startDistance}</p>
+                                <p className="content-time">{counter}</p>
                             </div>) :
                             <>
                                 {startDistance < 0 && endDistance > 0 ? (
                                     <div className="content-spacing">
                                         <p className="content-text-title">Registration Closes</p>
-                                        <p className="content-time">{endDistance}</p>
+                                        <p className="content-time">{counter}</p>
                                     </div>) :
                                     <div className="content-spacing">
                                         <p className="content-text-title">Registration Closed</p>
