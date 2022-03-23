@@ -1,9 +1,19 @@
+.navbar{
+    /*background-color: red;*/
+}
+
+.navbar-brand{
+    /*background-color: violet;*/
+}
+
 .navbar .navbar-nav {
+    /*background-color: yellow;*/
     width: 100%;
 }
 
+
 .nav-button{
+    /*background-color: darkgreen;*/
     display: flex;
-    position: absolute ;
-    right : 0;
+    margin-left: auto;
 }

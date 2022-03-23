@@ -6,6 +6,7 @@ import {Cancel, CheckCircle, GitHub, Language, Telegram, Twitter} from "@mui/ico
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import {useProject} from "../../hooks";
+import rocket from "../../assets/img/rocket.png";
 
 export function MenuInterface() {
     const [activeTab, setActiveTab] = React.useState("two");
@@ -40,8 +41,9 @@ export function MenuInterface() {
                 </Box>
                 <Box className="headline-right-box">
                     <img
-                        src="https://shortpixel.com/img/slider/berries-optimized-by-shortpixel.jpg"
-                        className="headline-img"
+                        src = {rocket}
+                        alt = "oracle-finance"
+                        className = "headline-img"
                     />
                 </Box>
             </div>
@@ -149,6 +151,7 @@ function LaunchpadHome(props: any) {
         <div className="card-root">
             <img
                 src={"https://ipfs.infura.io/ipfs/" + props.project.imageIpfsId.bannerImageId}
+                alt = {props.project.projectInfo.name}
                 className="img"
             />
             <div className="icons">
@@ -200,13 +203,13 @@ function LaunchpadHome(props: any) {
                         {startDistance > 0 && endDistance > 0 ? (
                                 <div className="content-spacing">
                                     <p className="content-text-title">Registration Opens</p>
-                                    <p className="content-time">{counter}</p>
+                                    <p className="content-time">{startDistance}</p>
                                 </div>) :
                             <>
                                 {startDistance < 0 && endDistance > 0 ? (
                                         <div className="content-spacing">
                                             <p className="content-text-title">Registration Closes</p>
-                                            <p className="content-time">CLOSED</p>
+                                            <p className="content-time">{endDistance}</p>
                                         </div>) :
                                     <div className="content-spacing">
                                         <p className="content-text-title">Registration Closed</p>
@@ -252,11 +255,11 @@ function LaunchpadHome(props: any) {
                 }
             </>
             }
-            <div className="button-div">
+            <p className="button-div">
                 <button className="research" type="button" onClick={showProjectDetail}>
                     Research
                 </button>
-            </div>
+            </p>
         </div>
     );
 }

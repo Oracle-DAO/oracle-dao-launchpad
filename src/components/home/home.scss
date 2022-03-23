@@ -19,6 +19,7 @@
     justify-content: center;
   }
   .headline-img {
+    height: 500px;
     max-width: 100%;
   }
 }
@@ -27,7 +28,7 @@
   .headline-root {
     display: flex;
     justify-content: center;
-    margin: 12em 0em;
+    margin: 2em 0em;
   }
   .headline-left-box {
     display: flex;
@@ -42,6 +43,7 @@
     justify-content: center;
   }
   .headline-img {
+    height: 650px;
     max-width: 100%;
   }
 }
@@ -111,6 +113,8 @@ ul.nav {
 }
 
 .card-root {
+  display: flex;
+  flex-direction: column;
   background-color: rgba(230, 230, 230, 0.05);
   max-width: 100%;
   border: 1px solid #3e46f3;
@@ -190,7 +194,7 @@ ul.nav {
 .button-div {
   display: flex;
   justify-content: center;
-  padding-bottom: 1em;
+  margin-top: auto;
 }
 
 .research {
