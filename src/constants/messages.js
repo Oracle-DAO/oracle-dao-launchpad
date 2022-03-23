@@ -1,6 +1,6 @@
 export const messages = {
   please_connect:
-    "Please connect your wallet to the Metis network to use Oracle DAO.",
+    "Please connect your wallet to the Oasis Emerald network to use Oracle DAO.",
   please_connect_wallet: "Please connect your wallet.",
   try_mint_more: (value) =>
     `You're trying to bond more than the maximum payout available! The maximum bond payout is ${value} ORCL.`,
@@ -14,7 +14,7 @@ export const messages = {
   your_balance_updated: "Your balance was successfully updated",
   nothing_to_claim: "You have nothing to claim",
   something_wrong: "Something went wrong",
-  switch_to_stardust: "Switch to the Metis Stardust Network?",
+  switch_to_stardust: "Switch to the Oasis Emerald Network?",
   slippage_too_small: "Slippage too small",
   slippage_too_big: "Slippage too big",
   your_balance_update_soon: "Your balance will update soon",
