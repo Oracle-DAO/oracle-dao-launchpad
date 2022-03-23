@@ -1,11 +1,16 @@
-import "./home.scss";
 import * as React from "react";
-import {useNavigate} from "react-router-dom";
-import {Box, Button, Grid} from "@mui/material";
-import {Cancel, CheckCircle, GitHub, Language, Telegram, Twitter} from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import { Box, Button, Grid } from "@mui/material";
+import { Cancel, CheckCircle, GitHub, Language, Telegram, Twitter } from "@mui/icons-material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import {useProject} from "../../hooks";
+
+import { useProject, useWeb3Context } from "../../hooks";
+import { ADDRESSES, DEFAULT_NETWORK } from "../../constants";
+import { fetchProjectDetails } from "../../store/slices";
+import "./home.scss";
 import rocket from "../../assets/img/rocket.png";
 
 export function MenuInterface() {
@@ -13,7 +18,15 @@ export function MenuInterface() {
     const handleChange = (id: any) => {
         setActiveTab(id);
     };
-    const {ongoing, upcoming, ended} = useProject();
+    const { provider } = useWeb3Context();
+    const dispatch = useDispatch();
+    React.useEffect(() => {
+        Object.values(ADDRESSES).map(address => {
+            dispatch(fetchProjectDetails({ address, provider, networkID: DEFAULT_NETWORK }));
+        });
+    }, []);
+
+    const { ongoing, upcoming, ended } = useProject();
     return (
         <>
             <div className="headline-root">
@@ -23,16 +36,16 @@ export function MenuInterface() {
                             <p>What is Oracle Finance?</p>
                             <p>
                                 A Financial Platform To Facilitate
-                                <br/>A Multitude Of Cryptocurrency
-                                <br/>
+                                <br />A Multitude Of Cryptocurrency
+                                <br />
                                 Investing
                             </p>
                             <div>
                                 <p>
                                     Oracle is a community-governed, yield generating
-                                    <br/>
+                                    <br />
                                     deflationary protocol that is built for sustainable
-                                    <br/>
+                                    <br />
                                     growth in any market condition
                                 </p>
                             </div>
@@ -72,23 +85,23 @@ export function MenuInterface() {
                 </div>
             </div>
             {activeTab === "one" ? (
-                    <Grid container justifyContent="center" spacing={5} marginBottom={5}>
-                        {Object.keys(upcoming).map((value) => {
-                            return (
-                                <Grid item xs={10} sm={8} md={6} lg={4} key={value}>
-                                    <LaunchpadHome project={upcoming[value]}/>
-                                </Grid>
-                            );
-                        })}
-                    </Grid>
-                ) :
+                <Grid container justifyContent="center" spacing={5} marginBottom={5}>
+                    {Object.keys(upcoming).map((value) => {
+                        return (
+                            <Grid item xs={10} sm={8} md={6} lg={4} key={value}>
+                                <LaunchpadHome project={upcoming[value]} />
+                            </Grid>
+                        );
+                    })}
+                </Grid>
+            ) :
                 <>
                     {activeTab === "two" ? (
                         <Grid container justifyContent="center" spacing={5} marginBottom={5}>
                             {Object.keys(ongoing).map((value) => {
                                 return (
                                     <Grid item xs={10} sm={8} md={6} lg={4} key={value}>
-                                        <LaunchpadHome project={ongoing[value]}/>
+                                        <LaunchpadHome project={ongoing[value]} />
                                     </Grid>
                                 );
                             })}
@@ -98,7 +111,7 @@ export function MenuInterface() {
                             {Object.keys(ended).map((value) => {
                                 return (
                                     <Grid item xs={10} sm={8} md={6} lg={4} key={value}>
-                                        <LaunchpadHome project={ended[value]}/>
+                                        <LaunchpadHome project={ended[value]} />
                                     </Grid>
                                 );
                             })}
@@ -130,11 +143,11 @@ function LaunchpadHome(props: any) {
         setTimeout(() => {
             let distance = 0;
             if (endDistance > 0 && startDistance > 0) {
-                 distance = props.project.projectTime[0] - Math.round((new Date()).getTime() / 1000);
-                 startDistance = distance;
-            } else if(endDistance > 0 && startDistance > 0) {
-                 distance = props.project.projectTime[1] - Math.round((new Date()).getTime() / 1000);
-                 endDistance = distance;
+                distance = props.project.projectTime[0] - Math.round((new Date()).getTime() / 1000);
+                startDistance = distance;
+            } else if (endDistance > 0 && startDistance > 0) {
+                distance = props.project.projectTime[1] - Math.round((new Date()).getTime() / 1000);
+                endDistance = distance;
             }
             else {
                 clearTimeout();
@@ -159,25 +172,25 @@ function LaunchpadHome(props: any) {
                     {typeof (props.project.projectInfo.socials.website) !== "undefined" ? (
                         <Grid item xs={2}>
                             <Button href={props.project.projectInfo.socials.website}>
-                                <Language/>
+                                <Language />
                             </Button>
                         </Grid>) : <></>}
                     {typeof (props.project.projectInfo.socials.twitter) != "undefined" ? (
                         <Grid item xs={2}>
                             <Button href={props.project.projectInfo.socials.twitter}>
-                                <Twitter/>
+                                <Twitter />
                             </Button>
                         </Grid>) : <></>}
                     {typeof (props.project.projectInfo.socials.telegram) != "undefined" ? (
                         <Grid item xs={2}>
                             <Button href={props.project.projectInfo.socials.telegram}>
-                                <Telegram/>
+                                <Telegram />
                             </Button>
                         </Grid>) : <></>}
                     {typeof (props.project.projectInfo.socials.github) != "undefined" ? (
                         <Grid item xs={2}>
                             <Button href={props.project.projectInfo.socials.github}>
-                                <GitHub/>
+                                <GitHub />
                             </Button>
                         </Grid>
                     ) : <></>}
@@ -191,9 +204,9 @@ function LaunchpadHome(props: any) {
                     indicatorColor="secondary"
                     aria-label="secondary tabs"
                 >
-                    <Tab value="one" label="Offering"/>
-                    <Tab value="two" label="Screening"/>
-                    <Tab value="three" label="Description"/>
+                    <Tab value="one" label="Offering" />
+                    <Tab value="two" label="Screening" />
+                    <Tab value="three" label="Description" />
                 </Tabs>
             </div>
             {value === "one" ? (
@@ -201,16 +214,16 @@ function LaunchpadHome(props: any) {
                     <div>
                         <p>{props.project.projectInfo.name}</p>
                         {startDistance > 0 && endDistance > 0 ? (
-                                <div className="content-spacing">
-                                    <p className="content-text-title">Registration Opens</p>
-                                    <p className="content-time">{startDistance}</p>
-                                </div>) :
+                            <div className="content-spacing">
+                                <p className="content-text-title">Registration Opens</p>
+                                <p className="content-time">{startDistance}</p>
+                            </div>) :
                             <>
                                 {startDistance < 0 && endDistance > 0 ? (
-                                        <div className="content-spacing">
-                                            <p className="content-text-title">Registration Closes</p>
-                                            <p className="content-time">{endDistance}</p>
-                                        </div>) :
+                                    <div className="content-spacing">
+                                        <p className="content-text-title">Registration Closes</p>
+                                        <p className="content-time">{endDistance}</p>
+                                    </div>) :
                                     <div className="content-spacing">
                                         <p className="content-text-title">Registration Closed</p>
                                         <p className="content-time">CLOSED</p>
@@ -232,21 +245,21 @@ function LaunchpadHome(props: any) {
                 </div>
             ) : <>
                 {value === "two" ? (
-                        <div className="content">
-                            <div className="d-flex flex-row">
-                                <CheckCircle color="success" className="me-3"/>
-                                <p className="text-white">
-                                    Metrics advised by Oracle Finance
-                                </p>
-                            </div>
-                            <div className="d-flex flex-row ">
-                                <Cancel color="error" className="me-3"/>
-                                <p className="text-white">
-                                    Controlled Cap Table
-                                </p>
-                            </div>
+                    <div className="content">
+                        <div className="d-flex flex-row">
+                            <CheckCircle color="success" className="me-3" />
+                            <p className="text-white">
+                                Metrics advised by Oracle Finance
+                            </p>
                         </div>
-                    )
+                        <div className="d-flex flex-row ">
+                            <Cancel color="error" className="me-3" />
+                            <p className="text-white">
+                                Controlled Cap Table
+                            </p>
+                        </div>
+                    </div>
+                )
                     : (
                         <div className="content">
                             <p className="text-white">{props.project.projectInfo.description}</p>
