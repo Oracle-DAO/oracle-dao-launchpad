@@ -3,7 +3,13 @@ import { useParams } from "react-router-dom";
 import { ethers } from "ethers";
 import { useDispatch, useSelector } from "react-redux";
 
-import { OutlinedInput, InputAdornment } from "@mui/material";
+import {
+  OutlinedInput,
+  InputAdornment,
+  IconButton,
+  Button,
+} from "@mui/material";
+import { Cancel, CheckCircle } from "@mui/icons-material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import LinearProgress from "@mui/material/LinearProgress";
@@ -32,6 +38,7 @@ export function ProjectDetails() {
   const [canInvest, setCanInvest] = React.useState(0);
   const [allowance, setAllowance] = React.useState(false);
   const [quantity, setQuantity] = React.useState("");
+  const ipfsURL = "https://ipfs.infura.io/ipfs/";
 
   let { id } = useParams();
   const { provider, address, chainID, checkWrongNetwork } = useWeb3Context();
@@ -53,6 +60,7 @@ export function ProjectDetails() {
   }, []);
   React.useEffect(() => {
     if (projectDetails && projectDetails.loading == false) {
+      console.log(projectDetails);
       setProjectLoading(false);
     }
   }, [projectDetails]);
@@ -153,168 +161,169 @@ export function ProjectDetails() {
       {projectLoading && <p>Loading</p>}
       {!projectLoading && (
         <div className="project-details-wrapper">
-          <div className="details mt-5 p-5 pt-0">
+          <div className="details mt-5 p-5">
             <div className="d-flex justify-content-between flex-wrap">
-              <div className="d-flex align-items-center mt-5">
-                <span className="icon"></span>
-                <span className="project-name ms-3">Gamium</span>
+              <div className="d-flex align-items-center mb-3">
+                <span className="icon">
+                  <img
+                    alt="Project icon"
+                    height="55px"
+                    width="55px"
+                    src={ipfsURL + projectDetails.imageIpfsId.logoImageId}
+                  ></img>
+                </span>
+                <span className="project-name ms-3">
+                  {projectDetails.projectInfo.name}
+                </span>
               </div>
-              <div className="d-flex  align-items-center mt-5">
-                <a className="social-links ms-3" href="/" target="_blank">
-                  <i className="bi-twitter"></i>
-                </a>
-                <a className="social-links ms-3" href="/" target="_blank">
-                  <i className="bi-twitter"></i>
-                </a>
-                <a className="social-links ms-3" href="/" target="_blank">
-                  <i className="bi-twitter"></i>
-                </a>
-                <a className="social-links ms-3" href="/" target="_blank">
-                  <i className="bi-twitter"></i>
-                </a>
+              <div className="d-flex  align-items-center mb-3">
+                {projectDetails.projectInfo.socials &&
+                  projectDetails.projectInfo.socials.twitter && (
+                    <a
+                      className="social-links me-3"
+                      href={projectDetails.projectInfo.socials.twitter}
+                      target="_blank"
+                    >
+                      <i className="bi-twitter"></i>
+                    </a>
+                  )}
+                {projectDetails.projectInfo.socials &&
+                  projectDetails.projectInfo.socials.website && (
+                    <a
+                      className="social-links me-3"
+                      href={projectDetails.projectInfo.socials.website}
+                      target="_blank"
+                    >
+                      <i className="bi-globe"></i>
+                    </a>
+                  )}
+                {projectDetails.projectInfo.socials &&
+                  projectDetails.projectInfo.socials.telegram && (
+                    <a
+                      className="social-links me-3"
+                      href={projectDetails.projectInfo.socials.telegram}
+                      target="_blank"
+                    >
+                      <i className="bi-telegram"></i>
+                    </a>
+                  )}
+                {projectDetails.projectInfo.socials &&
+                  projectDetails.projectInfo.socials.discord && (
+                    <a
+                      className="social-links me-3"
+                      href={projectDetails.projectInfo.socials.discord}
+                      target="_blank"
+                    >
+                      <i className="bi-discord"></i>
+                    </a>
+                  )}
+                {projectDetails.projectInfo.socials &&
+                  projectDetails.projectInfo.socials.github && (
+                    <a
+                      className="social-links me-3"
+                      href={projectDetails.projectInfo.socials.github}
+                      target="_blank"
+                    >
+                      <i className="bi-github"></i>
+                    </a>
+                  )}
               </div>
             </div>
-            <div className="mt-3">
+            <div>
               <p className="description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur.
+                {projectDetails.projectInfo.description}
               </p>
             </div>
           </div>
           <div className="additional-details d-flex mt-5 flex-wrap">
-            <div className="flex-grow-1 graph">
-              {/*<img*/}
-              {/*    // TODO fix the image size*/}
-              {/*    style={{ maxWidth: "200px", maxHeight: "200px"}}*/}
-              {/*    alt={`Project Banner`}*/}
-              {/*    src={"https://ipfs.infura.io/ipfs/" + "QmSigQ8iu5aj2w1kan4vD1f9bnFBrxyNM6ZXB2JTU2g232"}*/}
-              {/*/>*/}
-              <div className="spacer"></div>
-              <div className="screening p-4">
-                <div className="d-flex align-items-center">
-                  <span className="icon"></span>
-                  <span className="project-name ms-3">Gamium</span>
-                </div>
-                <div className="d-flex mt-4 flex-wrap">
-                  <div className="d-flex flex-grow-1 align-items-center">
-                    <span className="icon"></span>
-                    <div className="d-flex flex-column ms-3">
-                      <span className="s-title">Lead VC</span>
-                      <span className="b-title">Dao maker</span>
-                    </div>
-                  </div>
-                  <div className="d-flex flex-grow-1 align-items-center">
-                    <span className="icon"></span>
-                    <div className="d-flex flex-column ms-3">
-                      <span className="s-title">Lead VC</span>
-                      <span className="b-title">Dao maker</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="d-flex mt-4 flex-wrap">
-                  <div className="d-flex flex-grow-1 align-items-center">
-                    <span className="ckbox untick">
-                      <i className="bi-x"></i>
-                    </span>
-                    <span className="b-title">Controlled Cap</span>
-                  </div>
-                  <div className="d-flex flex-grow-1 align-items-center">
-                    <span className="ckbox tick">
-                      <i className="bi-check"></i>
-                    </span>
-                    <span className="b-title">DAO Approved Metrics</span>
-                  </div>
-                </div>
+            <div className="graph mb-5">
+              <img
+                alt={`Project Banner`}
+                src={ipfsURL + projectDetails.imageIpfsId.bannerImageId}
+              />
+            </div>
+            <div className="screening p-4 mb-5 flex-sm-grow-1">
+              <div className="d-flex flex-row">
+                <CheckCircle color="success" className="me-3" />
+                <p className="text-white">Metrics advised by Oracle Finance</p>
+              </div>
+              <div className="d-flex flex-row ">
+                <Cancel color="error" className="me-3" />
+                <p className="text-white">Controlled Cap Table</p>
               </div>
             </div>
           </div>
-          <div className="progress-container flex-wrap flex-column d-flex mt-5 p-3">
-            <div className="flex-wrap d-flex flex-row align-items-center">
-              <div className="flex-grow-1 progress-line">
+          <div className="progress-container d-flex flex-wrap">
+            <div className="graph mb-5 p-4">
+              <div className="my-3">
                 <LinearProgress variant="determinate" value={progress} />
               </div>
-              <div className="ms-3">
-                {address && (
-                  <>
-                    <OutlinedInput
-                      type="number"
-                      placeholder="Amount"
-                      className="stake-card-action-input"
-                      value={quantity}
-                      onChange={(e) => setQuantity(e.target.value)}
-                      labelWidth={0}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <div
-                            onClick={setMax}
-                            className="stake-card-action-input-btn"
-                          >
-                            <p>Max</p>
-                          </div>
-                        </InputAdornment>
-                      }
-                    />
-                    <div className="stake-card-tab-panel">
-                      {address && allowance ? (
-                        <div
-                          className="stake-card-tab-panel-btn"
-                          onClick={() => {
-                            if (isPendingTxn(pendingTransactions, "investing"))
-                              return;
-                            onInvest();
-                          }}
-                        >
-                          <p>
-                            {txnButtonText(
-                              pendingTransactions,
-                              "investing",
-                              "Invest"
-                            )}
-                          </p>
-                        </div>
-                      ) : (
-                        <div
-                          className="stake-card-tab-panel-btn"
-                          onClick={() => {
-                            if (
-                              isPendingTxn(
-                                pendingTransactions,
-                                "approve_investment"
-                              )
-                            )
-                              return;
-                            onSeekApproval();
-                          }}
-                        >
-                          <p>
-                            {txnButtonText(
-                              pendingTransactions,
-                              "approve_investment",
-                              "Approve"
-                            )}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  </>
-                )}
-                {!address && <ConnectMenu></ConnectMenu>}
-              </div>
+              <p>Amount to raise: {amountToRaised}</p>
+              <p>Amount raised: {amountRaised}</p>
             </div>
-            <p>Amount to raise: {amountToRaised}</p>
-            <p>Amount raised: {amountRaised}</p>
-            {address && (
-              <>
-                <p>Invested: {invested}</p>
-                <p>Can Invest: {canInvest}</p>
-              </>
-            )}
+            <div className="screening p-4 mb-5 flex-sm-grow-1">
+              {address && (
+                <>
+                  <OutlinedInput
+                    type="number"
+                    placeholder="Amount"
+                    value={quantity}
+                    onChange={(e) => setQuantity(e.target.value)}
+                    id="outlined-basic"
+                    variant="outlined"
+                    className="outline-input"
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton onClick={setMax} edge="end">
+                          Max
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                  {address && allowance ? (
+                    <Button
+                      onClick={() => {
+                        if (isPendingTxn(pendingTransactions, "investing"))
+                          return;
+                        onInvest();
+                      }}
+                      variant="outlined"
+                    >
+                      {txnButtonText(
+                        pendingTransactions,
+                        "investing",
+                        "Invest"
+                      )}
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={() => {
+                        if (
+                          isPendingTxn(
+                            pendingTransactions,
+                            "approve_investment"
+                          )
+                        )
+                          return;
+                        onSeekApproval();
+                      }}
+                      variant="outlined"
+                    >
+                      {txnButtonText(
+                        pendingTransactions,
+                        "approve_investment",
+                        "Approve"
+                      )}
+                    </Button>
+                  )}
+                  <p className="mt-3">Invested: {invested}</p>
+                  <p>Can Invest: {canInvest}</p>
+                </>
+              )}
+              {!address && <ConnectMenu></ConnectMenu>}
+            </div>
           </div>
-          <div className="table-section d-flex mt-5 mb-5 p-4 flex-column">
+          <div className="table-section d-flex mb-5 p-4 flex-column">
             <div className="tabs d-flex align-items-start">
               <Tabs
                 value={activeTab}
