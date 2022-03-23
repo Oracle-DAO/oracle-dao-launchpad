@@ -1,21 +1,27 @@
 import routes from "./Routes";
-import {ADDRESSES, DEFAULT_NETWORK} from "./constants";
-import {useWeb3Context} from "./hooks";
-import {useRoutes} from "react-router-dom";
-import {fetchProjectDetails} from "./store/slices/project_slice";
-import {useDispatch} from "react-redux";
+
+import { useRoutes } from "react-router-dom";
+import {useAddress, useWeb3Context} from "./hooks";
+import {useEffect, useState} from "react";
 
 function App() {
-    const dispatch = useDispatch();
-    let element = useRoutes(routes);
-    const {provider} = useWeb3Context();
+  const { connect, provider, hasCachedProvider, chainID, connected } = useWeb3Context();
+  const address = useAddress();
 
-    Object.values(ADDRESSES).map(address => {
-        console.log(provider, address, DEFAULT_NETWORK);
-        dispatch(fetchProjectDetails({address, provider, networkID: DEFAULT_NETWORK}));
-    });
+  const [walletChecked, setWalletChecked] = useState(false);
 
-    return <>{element}</>;
+  useEffect(() => {
+    if (hasCachedProvider()) {
+      connect().then(() => {
+        setWalletChecked(true);
+      });
+    } else {
+      setWalletChecked(true);
+    }
+  }, []);
+
+  let element = useRoutes(routes);
+  return <>{element}</>;
 }
 
 export default App;

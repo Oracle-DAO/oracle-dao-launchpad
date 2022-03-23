@@ -1,9 +1,9 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {JsonRpcProvider, StaticJsonRpcProvider} from "@ethersproject/providers";
-import {Networks} from "../../constants";
-import {PublicSale} from "../../abis";
-import {ethers} from "ethers";
-import {loadIpfsIdPerProject, loadProjectInfo} from "../../helpers/get_ipfs_ids";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { JsonRpcProvider, StaticJsonRpcProvider } from "@ethersproject/providers";
+import { Networks } from "../../constants";
+import { PublicSale } from "../../abis";
+import { ethers } from "ethers";
+import { loadIpfsIdPerProject, loadProjectInfo } from "../../helpers/get_ipfs_ids";
 
 export interface IProjectTime {
     startTime: number;
@@ -58,17 +58,16 @@ interface ICalcProjectDetails {
 }
 
 export const fetchProjectDetails = createAsyncThunk("project/fetchProjectDetails", async ({
-                                                                                              provider,
-                                                                                              networkID,
-                                                                                              address
-                                                                                          }: ICalcProjectDetails, {dispatch}) => {
-
+    provider,
+    networkID,
+    address
+}: ICalcProjectDetails, { dispatch }) => {
     const projectContract = new ethers.Contract(address, PublicSale, provider);
     const ipfsId = await projectContract.getIpfsId();
     const allIpfsIds = await loadIpfsIdPerProject(ipfsId);
 
-    const imageIpfsId : IImageIpfsIds  = {
-        bannerImageId : allIpfsIds["bannerImageId"],
+    const imageIpfsId: IImageIpfsIds = {
+        bannerImageId: allIpfsIds["bannerImageId"],
         logoImageId: allIpfsIds["logoImageId"]
     };
     const projectInfo = await loadProjectInfo(allIpfsIds["projectDetailsId"]);
@@ -88,16 +87,15 @@ export const fetchProjectDetails = createAsyncThunk("project/fetchProjectDetails
         projectInfo,
         enabled,
     };
-})
-//,{
-//     condition: (data, { getState, extra }) => {
-//         const { projects }: any = getState();
-//         const projDetails = projects[data.address];
-//         if (projDetails.loading || (!projDetails.loading && !projDetails.error)) {
-//             return false;
-//         }
-//     },
-// }
+    // }, {
+    //     condition: (data, { getState, extra }) => {
+    //         const { projects }: any = getState();
+    //         const projDetails = projects[data.address];
+    //         if (projDetails.loading || (!projDetails.loading && !projDetails.error)) {
+    //             return false;
+    //         }
+    //     },
+});
 
 export interface IProjectDetailsSlice {
     [key: string]: any;
@@ -137,4 +135,4 @@ const projectSlice = createSlice({
 
 export default projectSlice.reducer;
 
-export const {fetchProjectDetailSuccess} = projectSlice.actions;
+export const { fetchProjectDetailSuccess } = projectSlice.actions;
