@@ -11,7 +11,7 @@ import { useProject, useWeb3Context } from "../../hooks";
 import { ADDRESSES, DEFAULT_NETWORK } from "../../constants";
 import { fetchProjectDetails } from "../../store/slices";
 import "./home.scss";
-import rocket from "../../assets/img/rocket.png";
+import rocket from "../../assets/img/rocket.webp";
 
 export function MenuInterface() {
     const [activeTab, setActiveTab] = React.useState("two");
