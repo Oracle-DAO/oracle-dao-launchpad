@@ -5,16 +5,7 @@ import { ConnectMenu } from "../index";
 import "./header.css";
 
 const links = [
-  {
-    id: 1,
-    text: "Oracle",
-    path: "/",
-  },
-  {
-    id: 2,
-    text: "How it Works",
-    path: "/stake",
-  },
+
 ];
 
 function CustomLink({ children, to, ...props }) {
