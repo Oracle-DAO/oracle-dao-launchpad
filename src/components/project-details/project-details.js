@@ -48,7 +48,7 @@ export function ProjectDetails() {
     return state.projects[id];
   });
   React.useEffect(() => {
-    if (projectDetails == undefined) {
+    if (projectDetails === undefined) {
       dispatch(
         fetchProjectDetails({
           address: id,
@@ -59,7 +59,7 @@ export function ProjectDetails() {
     }
   }, []);
   React.useEffect(() => {
-    if (projectDetails && projectDetails.loading == false) {
+    if (projectDetails && projectDetails.loading === false) {
       console.log(projectDetails);
       setProjectLoading(false);
     }
@@ -76,7 +76,7 @@ export function ProjectDetails() {
   });
 
   const setMax = () => {
-    setQuantity(canInvest);
+    setQuantity(canInvest - invested);
   };
 
   const onSeekApproval = async () => {
@@ -126,7 +126,7 @@ export function ProjectDetails() {
       setAmountToRaised(amountToRaised);
       setAmountRaised(amountRaised);
       const complition = (amountRaised * 100) / amountToRaised;
-      !isNaN(complition) && progress != complition && setProgress(complition);
+      !isNaN(complition) && progress !== complition && setProgress(complition);
     });
   };
 
@@ -141,11 +141,11 @@ export function ProjectDetails() {
   }, []);
 
   const updateUserTokens = () => {
-    projectContract.checkMaxTokenForUser(address).then((data) => {
-      setCanInvest(data / Math.pow(10, 18));
-    });
     projectContract.userToTokenAmount(address).then((data) => {
       setInvested(data / Math.pow(10, 18));
+    });
+    projectContract.checkMaxTokenForUser(address).then((data) => {
+      setCanInvest(data / Math.pow(10, 18));
     });
   };
 
@@ -335,7 +335,7 @@ export function ProjectDetails() {
               >
                 <Tab value="p-details" label="Project Details" />
                 <Tab value="schedule" label="Schedule" />
-                <Tab value="alloc" label="Your Allocation" />
+                {/*<Tab value="alloc" label="Your Allocation" />*/}
               </Tabs>
             </div>
             {activeTab === "p-details" && (
@@ -421,7 +421,7 @@ export function ProjectDetails() {
                 </div>
               </div>
             )}
-            {activeTab === "alloc" && <div>Your Allocation</div>}
+            {/*{activeTab === "alloc" && <div>Your Allocation</div>}*/}
           </div>
         </div>
       )}
