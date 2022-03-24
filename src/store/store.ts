@@ -18,10 +18,10 @@ const rootReducer = combineReducers({
     messages: messagesReducer,
 });
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+// const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
-    reducer: persistedReducer,
+    reducer: rootReducer,
     middleware: (getDefaultMiddleware) => {
         const defaultMiddlewares = getDefaultMiddleware({ serializableCheck: false });
         if (process.env.NODE_ENV === `development`) {

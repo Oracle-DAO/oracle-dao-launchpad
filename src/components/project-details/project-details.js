@@ -76,7 +76,7 @@ export function ProjectDetails() {
   });
 
   const setMax = () => {
-    setQuantity(canInvest - invested);
+    setQuantity(Math.max(canInvest - invested, 0));
   };
 
   const onSeekApproval = async () => {
@@ -258,8 +258,18 @@ export function ProjectDetails() {
               <div className="my-3">
                 <LinearProgress variant="determinate" value={progress} />
               </div>
-              <p>Amount to raise: {amountToRaised}</p>
-              <p>Amount raised: {amountRaised}</p>
+              <p>Amount to raise: {new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+                maximumFractionDigits: 2,
+                minimumFractionDigits: 2,
+              }).format(amountToRaised)}</p>
+              <p>Amount raised: {new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+                maximumFractionDigits: 2,
+                minimumFractionDigits: 2,
+              }).format(amountRaised)}</p>
             </div>
             <div className="screening p-4 mb-5 flex-sm-grow-1">
               {address && (
@@ -316,8 +326,18 @@ export function ProjectDetails() {
                       )}
                     </Button>
                   )}
-                  <p className="mt-3">Invested: {invested}</p>
-                  <p>Can Invest: {canInvest}</p>
+                  <p className="mt-3">Invested: {new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                    maximumFractionDigits: 2,
+                    minimumFractionDigits: 2,
+                  }).format(invested)}</p>
+                  <p>Total you can Invest: {new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                    maximumFractionDigits: 2,
+                    minimumFractionDigits: 2,
+                  }).format(canInvest)}</p>
                 </>
               )}
               {!address && <ConnectMenu></ConnectMenu>}
