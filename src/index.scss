@@ -1,16 +1,8 @@
-html,
-#root {
-  height: 100%;
-  width: 100%;
+.app-wrapper {
   font-family: "Poppins", sans-serif;
-}
-body {
   background-image: url("assets/img/main-bg.png");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: auto;
-  width: 100%;
-
 }
