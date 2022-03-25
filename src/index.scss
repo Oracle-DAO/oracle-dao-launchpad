@@ -1,14 +1,15 @@
 html,
-body,
 #root {
   height: 100%;
   width: 100%;
   font-family: "Poppins", sans-serif;
 }
 body {
-  background: url("assets/img/main-bg.png") no-repeat center center fixed;
+  background-image: url("assets/img/main-bg.png");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  height: auto;
+  width: 100%;
 }
