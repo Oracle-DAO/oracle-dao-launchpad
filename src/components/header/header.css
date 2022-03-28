@@ -1,19 +1,17 @@
-.navbar{
-    /*background-color: red;*/
-}
-
-.navbar-brand{
-    /*background-color: violet;*/
-}
-
 .navbar .navbar-nav {
-    /*background-color: yellow;*/
     width: 100%;
 }
 
-
-.nav-button{
-    /*background-color: darkgreen;*/
-    display: flex;
+.navbar-toggler {
     margin-left: auto;
+}
+
+.nav-button {
+    display: flex;
+}
+
+@media (max-width: 991px) {
+    .nav-button {
+        display: none;
+    }
 }

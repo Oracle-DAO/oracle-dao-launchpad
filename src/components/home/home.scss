@@ -1,3 +1,9 @@
+@import '../../index.scss';
+
+.container{
+  font-family: 'Poppins', sans-serif;
+}
+
 @media (max-width: 991px) {
   .headline-root {
     display: flex;
@@ -49,180 +55,160 @@
 }
 
 .main-info {
-  > div {
-    > p {
-      &:nth-child(1) {
-        color: #16fcd2;
-        font-weight: 250;
-        font-size: 24px;
-        letter-spacing: 0.1em;
-        line-height: 32px;
-      }
+> div {
+> p {
+&:nth-child(1) {
+   color: #16fcd2;
+   font-weight: 250;
+   font-size: 24px;
+   letter-spacing: 0.1em;
+   line-height: 32px;
+ }
 
-      &:nth-child(2) {
-        color: #ffffff;
-        font-weight: 500;
-        font-size: 34px;
-        line-height: 54px;
-      }
-    }
-
-    div {
-      p {
-        color: rgba(255, 255, 255, 0.6);
-        font-weight: 250;
-        font-size: 18px;
-        line-height: 32px;
-        letter-spacing: 0.1em;
-      }
-    }
-  }
+&:nth-child(2) {
+   color: #ffffff;
+   font-weight: 500;
+   font-size: 34px;
+   line-height: 54px;
+ }
 }
 
-.tab-div {
-  border-radius: 1.5em;
-  background: rgba(100, 224, 196, 0.15);
-}
-
-.tab-root {
-  margin-bottom: 5em;
-  margin-top: 5em;
-  display: flex;
-  justify-content: center;
-}
-
-ul.nav {
-  li {
-    padding-inline: 2em;
-    padding-top: 0.7em;
-    padding-bottom: 0.7em;
-    text-align: center;
-    color: white;
-    cursor: pointer;
-    transition: all 0.7s;
-    border-radius: 1.5em;
-
-    &:hover {
-      background: grey;
-    }
-  }
-
-  li.active {
-    background: #3e46f3;
-  }
-}
-
-.card-root {
-  display: flex;
-  flex-direction: column;
-  background-color: rgba(230, 230, 230, 0.05);
-  max-width: 100%;
-  border: 1px solid #3e46f3;
-  border-radius: 2em;
-  height: 735px;
-}
-
-.img {
-  border-top-left-radius: 2em;
-  border-top-right-radius: 2em;
-  width: 100%;
-  height: 275px;
-}
-
-.icons {
-  margin-top: 1em;
-}
-
-.tabs {
-  button {
-    font-size: 12px;
-    line-height: 2em;
-    letter-spacing: 0.1em;
-    color: #ffffff;
-  }
-
-  .MuiTabs-indicator {
-    background: #3e46f3;
-  }
-}
-
-.content {
-  margin: 1em;
-
-  > div {
-    > p {
-      &:nth-child(1) {
-        color: white;
-        font-weight: bold;
-        font-size: 2em;
-        letter-spacing: 0.1em;
-        line-height: 1em;
-        margin-bottom: 0.8em;
-      }
-    }
-  }
-}
-
-.content-spacing {
-  margin-bottom: 1.6em;
-}
-
-.content-text-title {
-  color: white;
+div {
+p {
+  color: rgba(255, 255, 255, 0.6);
   font-weight: 250;
-  font-size: 0.8em;
+  font-size: 18px;
+  line-height: 32px;
   letter-spacing: 0.1em;
-  line-height: 0.8em;
+}
+}
+}
 }
 
-.content-time {
-  color: #3e46f3;
-  font-weight: 350;
-  font-size: 1.2em;
+.project-selection-text-container > p:nth-child(1) {
+  margin-top: 50px;
+  color: #16fcd2;
+  font-weight: 600;
+  font-size: 20px;
   letter-spacing: 0.1em;
-  line-height: 0.8em;
+  line-height: 32px;
 }
 
-.content-text {
+.project-selection-container .project-selection-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url(../../assets/img/Project-selection.png);
+  height: 350px;
+  width: 50%;
+}
+.project-selection-container .project-selection-text {
+  width: 50%;
+}
+.project-selection-container .project-selection-text p:nth-child(1) {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 48px;
+  color: #ffffff;
+}
+.project-selection-container .project-selection-text p:nth-child(2) {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 32px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.detail-report-container .detail-report-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(../../assets/img/Detail-report.png);
+  background-size: contain;
+  height: 385px;
+  width: 50%;
+}
+.detail-report-container .detail-report-text {
+  width: 50%;
+}
+.detail-report-container .detail-report-text p:nth-child(1) {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 48px;
+  color: #ffffff;
+}
+.detail-report-container .detail-report-text p:nth-child(2) {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 32px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+
+.tier-system-container .tier-system-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(../../assets/img/Tierless.png);
+  background-size: contain;
+  height: 385px;
+  width: 50%;
+}
+.tier-system-container .tier-system-text {
+  width: 50%;
+}
+.tier-system-container .tier-system-text p:nth-child(1) {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 48px;
+  color: #ffffff;
+}
+.tier-system-container .tier-system-text p:nth-child(2) {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 32px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 570px) {
+  .team-text,
+  .work-text {
+    width: 100% !important;
+  }
+}
+
+.cards-container > div {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 5px;
+  flex-basis: 0;
+}
+.cards-container > div > p:nth-child(2) {
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 27px;
   color: white;
-  font-weight: 350;
-  font-size: 1.2em;
-  letter-spacing: 0.1em;
-  line-height: 0.8em;
 }
-
-.button-div {
-  display: flex;
-  justify-content: center;
-  margin-top: auto;
+.cards-container > div > p:nth-child(3) {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 32px;
+  color: rgba(255, 255, 255, 0.6);
 }
-
-.research {
-  width: 70%;
-  border: 0.5px solid;
-  line-height: 2.5;
-  padding: 0 2em;
-  font-size: 1em;
-  text-align: center;
-  color: #fff;
-  text-shadow: 1px 1px 1px #000;
-  border-radius: 40px;
-  background-color: #3e46f3;
-  box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.6), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
-
-  &:hover {
-    background-color: darkviolet;
+.cards-container > div > div {
+  display: inline-block;
+  color: white;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 3px;
+}
+@media (max-width: 991px) {
+  .cards-container {
+    flex-direction: column;
   }
-
-  &:active {
-    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6), inset 2px 2px 3px rgba(0, 0, 0, 0.6);
+  .cards-container > div {
+    margin-right: 0 !important;
   }
-}
-
-@media (max-width: 600px) {
-  ul.nav {
-    li {
-      padding-inline: 1.2em;
-    }
+  .work-image,
+  .team-image {
+    height: 320px !important;
   }
 }

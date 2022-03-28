@@ -5,7 +5,21 @@ import { ConnectMenu } from "../index";
 import "./header.css";
 
 const links = [
-
+  {
+    id: 1,
+    text: "Projects",
+    path: "/projects",
+  },
+  {
+    id: 2,
+    text: "Oracle Finance",
+    path: "/landing",
+  },
+  {
+    id: 3,
+    text: "Stake ORFI",
+    path: "/stake",
+  },
 ];
 
 function CustomLink({ children, to, ...props }) {
@@ -47,10 +61,10 @@ export const Header = () => {
                 <CustomLink to={link.path}>{link.text}</CustomLink>
               </li>
             ))}
-            <li className="nav-button">
-              <ConnectMenu></ConnectMenu>
-            </li>
           </ul>
+        </div>
+        <div className="nav-button">
+          <ConnectMenu></ConnectMenu>
         </div>
       </div>
     </nav>
