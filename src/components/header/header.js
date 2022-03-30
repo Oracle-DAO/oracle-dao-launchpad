@@ -10,16 +10,6 @@ const links = [
     text: "Projects",
     path: "/projects",
   },
-  {
-    id: 2,
-    text: "Oracle Finance",
-    path: "/landing",
-  },
-  {
-    id: 3,
-    text: "Stake ORFI",
-    path: "/stake",
-  },
 ];
 
 function CustomLink({ children, to, ...props }) {
@@ -56,11 +46,15 @@ export const Header = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center">
-            {links.map((link) => (
-              <li className="nav-item me-4" key={link.id}>
-                <CustomLink to={link.path}>{link.text}</CustomLink>
+              <li className="nav-item me-4" key={1}>
+                <CustomLink to="/projects">Projects</CustomLink>
               </li>
-            ))}
+            <li className="nav-item me-4" key={2}>
+              <a className="nav-link" href = "https://www.oracledao.finance/" target="_blank">Oracle Finance</a>
+            </li>
+            <li className="nav-item me-4" key={3}>
+              <a className="nav-link" href = "https://testapp.oracledao.finance/#/" target = "_blank">Stake ORFI</a>
+            </li>
           </ul>
         </div>
         <div className="nav-button">

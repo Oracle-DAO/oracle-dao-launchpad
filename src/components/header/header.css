@@ -2,16 +2,24 @@
     width: 100%;
 }
 
-.navbar-toggler {
+.navbar .navbar-toggler {
     margin-left: auto;
 }
 
-.nav-button {
+.navbar .nav-button {
     display: flex;
 }
 
+.navbar .navbar-nav .nav-item .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 18px;
+}
+.navbar .navbar-nav .nav-item .nav-link:hover {
+    color: #0a58ca;
+}
+
 @media (max-width: 991px) {
-    .nav-button {
+    .navbar .nav-button {
         display: none;
     }
 }

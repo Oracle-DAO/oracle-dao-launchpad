@@ -75,7 +75,7 @@ export function Home(){
             </section>
 
 
-            <div className="mt-5 cards-container d-flex flex-row">
+            <div className="mt-5 cards-container">
                 <div className="p-5 mt-3 flex-grow-1 me-3">
                     <div/>
                     <p>Staking & Bonding</p>

@@ -89,7 +89,7 @@ p {
   margin-top: 50px;
   color: #16fcd2;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 24px;
   letter-spacing: 0.1em;
   line-height: 32px;
 }
@@ -108,13 +108,13 @@ p {
 .project-selection-container .project-selection-text p:nth-child(1) {
   font-style: normal;
   font-weight: bold;
-  font-size: 30px;
-  line-height: 48px;
+  font-size: 34px;
+  line-height: 54px;
   color: #ffffff;
 }
 .project-selection-container .project-selection-text p:nth-child(2) {
   font-weight: 500;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 32px;
   color: rgba(255, 255, 255, 0.6);
 }
@@ -133,14 +133,14 @@ p {
 .detail-report-container .detail-report-text p:nth-child(1) {
   font-style: normal;
   font-weight: bold;
-  font-size: 30px;
-  line-height: 48px;
+  font-size: 34px;
+  line-height: 54px;
   color: #ffffff;
 }
 .detail-report-container .detail-report-text p:nth-child(2) {
   font-weight: 500;
-  font-size: 16px;
-  line-height: 32px;
+  font-size: 18px;
+  line-height: 34px;
   color: rgba(255, 255, 255, 0.6);
 }
 
@@ -159,22 +159,28 @@ p {
 .tier-system-container .tier-system-text p:nth-child(1) {
   font-style: normal;
   font-weight: bold;
-  font-size: 30px;
-  line-height: 48px;
+  font-size: 34px;
+  line-height: 54px;
   color: #ffffff;
 }
 .tier-system-container .tier-system-text p:nth-child(2) {
   font-weight: 500;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 32px;
   color: rgba(255, 255, 255, 0.6);
 }
 
-@media (max-width: 570px) {
-  .team-text,
-  .work-text {
+@media (max-width: 575px) {
+  .tier-system-text,
+  .detail-report-text,
+  .project-selection-text{
     width: 100% !important;
   }
+}
+
+.cards-container{
+  display: flex ;
+  flex-direction: row;
 }
 
 .cards-container > div {
@@ -207,8 +213,9 @@ p {
   .cards-container > div {
     margin-right: 0 !important;
   }
-  .work-image,
-  .team-image {
+  .tier-system-image,
+  .detail-report-image,
+  .project-selection-image{
     height: 320px !important;
   }
 }
