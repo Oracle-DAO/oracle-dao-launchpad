@@ -220,9 +220,9 @@ function LaunchpadHome(props: any) {
                     )
                     : (
                         <div className="content">
-                            <p className="text-white">{props.project.projectInfo.description.substring(0, 250)}
+                            <p className="text-white">{props.project.projectInfo.description.substring(0, 250) + " "}
                                 <a className="show-more-btn" href="javascript:void(0);" onClick={showProjectDetail} >
-                                    .......read more
+                                    ............read more
                                 </a>
                             </p>
                         </div>

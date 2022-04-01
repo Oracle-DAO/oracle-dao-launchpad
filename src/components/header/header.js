@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
-import { ReactComponent as Logo } from "../../assets/svg/logo.svg";
+import { ReactComponent as Logo } from "../../assets/img/Launchpad-logo.png";
 import { ConnectMenu } from "../index";
 import "./header.css";
 
