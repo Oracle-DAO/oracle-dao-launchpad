@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
-import { ReactComponent as Logo } from "../../assets/svg/launchpad-logo.svg";
+import {ReactComponent as  Logo} from "../../assets/svg/launchpad-logo.svg";
 import { ConnectMenu } from "../index";
 import "./header.css";
 
@@ -30,7 +30,7 @@ export const Header = () => {
     <nav className="navbar navbar-expand-lg navbar-dark">
       <div className="container-fluid">
         <a className="navbar-brand" href="/">
-          <Logo />
+          <Logo/>
         </a>
         <span></span>
         <button
