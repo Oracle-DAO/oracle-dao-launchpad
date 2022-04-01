@@ -255,21 +255,29 @@ export function ProjectDetails() {
           </div>
           <div className="progress-container d-flex flex-wrap">
             <div className="graph mb-5 p-4">
-              <div className="my-3">
+              <div className="d-flex justify-content-between progress-details">
+                <span>
+                  Amount to raise:{" "}
+                  {new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                    maximumFractionDigits: 2,
+                    minimumFractionDigits: 2,
+                  }).format(amountToRaised)}
+                </span>
+                <span>
+                  Amount raised:{" "}
+                  {new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                    maximumFractionDigits: 2,
+                    minimumFractionDigits: 2,
+                  }).format(amountRaised)}
+                </span>
+              </div>
+              <div>
                 <LinearProgress variant="determinate" value={progress} />
               </div>
-              <p>Amount to raise: {new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "USD",
-                maximumFractionDigits: 2,
-                minimumFractionDigits: 2,
-              }).format(amountToRaised)}</p>
-              <p>Amount raised: {new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "USD",
-                maximumFractionDigits: 2,
-                minimumFractionDigits: 2,
-              }).format(amountRaised)}</p>
             </div>
             <div className="screening p-4 mb-5 flex-sm-grow-1">
               {address && (
@@ -326,18 +334,24 @@ export function ProjectDetails() {
                       )}
                     </Button>
                   )}
-                  <p className="mt-3">Invested: {new Intl.NumberFormat("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                    maximumFractionDigits: 2,
-                    minimumFractionDigits: 2,
-                  }).format(invested)}</p>
-                  <p>Total you can Invest: {new Intl.NumberFormat("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                    maximumFractionDigits: 2,
-                    minimumFractionDigits: 2,
-                  }).format(canInvest)}</p>
+                  <p className="investment-details mt-3">
+                    Invested:{" "}
+                    {new Intl.NumberFormat("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                      maximumFractionDigits: 2,
+                      minimumFractionDigits: 2,
+                    }).format(invested)}
+                  </p>
+                  <p className="investment-details">
+                    Total you can Invest:{" "}
+                    {new Intl.NumberFormat("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                      maximumFractionDigits: 2,
+                      minimumFractionDigits: 2,
+                    }).format(canInvest)}
+                  </p>
                 </>
               )}
               {!address && <ConnectMenu></ConnectMenu>}
