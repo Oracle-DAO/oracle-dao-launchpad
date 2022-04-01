@@ -55,7 +55,7 @@ export function ConnectMenu() {
   }, [web3, connected]);
 
   return (
-    <Div className="ms-3" style={buttonStyle} onClick={clickFunc}>
+    <Div className="ms-3 connect-button" style={buttonStyle} onClick={clickFunc}>
       <P className="mb-0">{buttonText}</P>
     </Div>
   );
