@@ -373,7 +373,7 @@ export function ProjectDetails() {
                 centered
               >
                 <Tab value="p-details" label="Project Details" />
-                <Tab value="schedule" label="Schedule" />
+                {/*<Tab value="schedule" label="Schedule" />*/}
                 {/*<Tab value="alloc" label="Your Allocation" />*/}
               </Tabs>
             </div>
@@ -389,15 +389,15 @@ export function ProjectDetails() {
                     <tbody>
                       <tr>
                         <td>Name</td>
-                        <td>Operon Origins</td>
+                        <td>Oracle Finance</td>
                       </tr>
                       <tr>
                         <td>Token Symbol</td>
-                        <td>ORO</td>
+                        <td>ORFI</td>
                       </tr>
                       <tr>
                         <td>Total Supply </td>
-                        <td>1000000</td>
+                        <td> Elastic Supply</td>
                       </tr>
                     </tbody>
                   </table>
@@ -413,19 +413,11 @@ export function ProjectDetails() {
                     <tbody>
                     <tr>
                       <td>Opens</td>
-                      <td>2021-12-02 08:00:00 UTC</td>
+                      <td>2022-04-07 05:00:00 UTC</td>
                     </tr>
                     <tr>
-                      <td>Opens</td>
-                      <td>2021-12-02 08:00:00 UTC</td>
-                    </tr>
-                    <tr>
-                      <td>Opens</td>
-                      <td>2021-12-02 08:00:00 UTC</td>
-                    </tr>
-                    <tr>
-                      <td>Opens</td>
-                      <td>2021-12-02 08:00:00 UTC</td>
+                      <td>Closes</td>
+                      <td>2022-04-08 05:00:00 UTC</td>
                     </tr>
                     </tbody>
                   </table>
