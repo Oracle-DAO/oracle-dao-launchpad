@@ -44,26 +44,31 @@ export function ProjectDetails() {
   const { provider, address, chainID, checkWrongNetwork } = useWeb3Context();
   const dispatch = useDispatch();
 
-  const projectDetails = useSelector((state) => {
-    return state.projects[id];
-  });
-  React.useEffect(() => {
-    if (projectDetails === undefined) {
-      dispatch(
-        fetchProjectDetails({
-          address: id,
-          provider,
-          networkID: DEFAULT_NETWORK,
-        })
-      );
-    }
-  }, []);
-  React.useEffect(() => {
-    if (projectDetails && projectDetails.loading === false) {
-      console.log(projectDetails);
-      setProjectLoading(false);
-    }
-  }, [projectDetails]);
+    const projectDetails = useSelector((state) => {
+        return state.projects[id];
+    });
+    React.useEffect(() => {
+        if (projectDetails === undefined) {
+            dispatch(
+                fetchProjectDetails({
+                    address: id,
+                    provider,
+                    networkID: DEFAULT_NETWORK,
+                })
+            );
+        }
+    }, []);
+    React.useEffect(() => {
+        if (projectDetails && projectDetails.loading === false) {
+            setProjectLoading(false);
+            let projectTokenAddress = projectDetails.tokenInfo.projectTokenAddress;
+            // if(projectTokenAddress){
+            //     setTotalSupply(projectTokenAddress.totalIDOTokenSupply);
+            //     setTime(projectTokenAddress.projectTime);
+            // }
+        }
+        // console.log(time, totalSupply);
+    }, [projectDetails]);
 
   const projectContract = new ethers.Contract(id, PublicSale, provider);
   const stableCoinContract = new ethers.Contract(
@@ -374,7 +379,6 @@ export function ProjectDetails() {
             </div>
             {activeTab === "p-details" && (
               <div className="d-flex flex-wrap">
-                {/*<div className="spacer"></div>*/}
                 <div className="mt-4 flex-grow-1">
                   <table>
                     <thead>
@@ -394,37 +398,6 @@ export function ProjectDetails() {
                       <tr>
                         <td>Total Supply </td>
                         <td>1000000</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            )}
-            {activeTab === "schedule" && (
-              <div className="d-flex flex-wrap">
-                <div className="mt-4 flex-grow-1">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th colSpan="2">Pool Information</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Opens</td>
-                        <td>2021-12-02 08:00:00 UTC</td>
-                      </tr>
-                      <tr>
-                        <td>Opens</td>
-                        <td>2021-12-02 08:00:00 UTC</td>
-                      </tr>
-                      <tr>
-                        <td>Opens</td>
-                        <td>2021-12-02 08:00:00 UTC</td>
-                      </tr>
-                      <tr>
-                        <td>Opens</td>
-                        <td>2021-12-02 08:00:00 UTC</td>
                       </tr>
                     </tbody>
                   </table>
@@ -433,28 +406,35 @@ export function ProjectDetails() {
                 <div className="mt-4 flex-grow-1">
                   <table>
                     <thead>
-                      <tr>
-                        <th colSpan="2">Token information</th>
-                      </tr>
+                    <tr>
+                      <th colSpan="2">Pool Information</th>
+                    </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Name</td>
-                        <td>Operon Origins</td>
-                      </tr>
-                      <tr>
-                        <td>Token Symbol</td>
-                        <td>ORO</td>
-                      </tr>
-                      <tr>
-                        <td>Total Supply </td>
-                        <td>1000000</td>
-                      </tr>
+                    <tr>
+                      <td>Opens</td>
+                      <td>2021-12-02 08:00:00 UTC</td>
+                    </tr>
+                    <tr>
+                      <td>Opens</td>
+                      <td>2021-12-02 08:00:00 UTC</td>
+                    </tr>
+                    <tr>
+                      <td>Opens</td>
+                      <td>2021-12-02 08:00:00 UTC</td>
+                    </tr>
+                    <tr>
+                      <td>Opens</td>
+                      <td>2021-12-02 08:00:00 UTC</td>
+                    </tr>
                     </tbody>
                   </table>
                 </div>
               </div>
             )}
+            {/*{activeTab === "schedule" && (*/}
+            {/*  <div></div>*/}
+            {/*)}*/}
             {/*{activeTab === "alloc" && <div>Your Allocation</div>}*/}
           </div>
         </div>

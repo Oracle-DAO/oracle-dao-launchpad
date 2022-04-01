@@ -1,19 +1,25 @@
-.navbar{
-    /*background-color: red;*/
-}
-
-.navbar-brand{
-    /*background-color: violet;*/
-}
-
 .navbar .navbar-nav {
-    /*background-color: yellow;*/
     width: 100%;
 }
 
-
-.nav-button{
-    /*background-color: darkgreen;*/
-    display: flex;
+.navbar .navbar-toggler {
     margin-left: auto;
+}
+
+.navbar .nav-button {
+    display: flex;
+}
+
+.navbar .navbar-nav .nav-item .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 18px;
+}
+.navbar .navbar-nav .nav-item .nav-link:hover {
+    color: #0a58ca;
+}
+
+@media (max-width: 991px) {
+    .navbar .nav-button {
+        display: none;
+    }
 }
