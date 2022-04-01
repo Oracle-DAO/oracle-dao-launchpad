@@ -44,7 +44,7 @@ ul.nav {
   max-width: 100%;
   border: 1px solid #3e46f3;
   border-radius: 2em;
-  height: 735px;
+  height: 700px;
 }
 
 .img {
@@ -56,6 +56,13 @@ ul.nav {
 
 .icons {
   margin-top: 1em;
+  margin-left: 1em;
+  margin-bottom: 1em;
+}
+
+.social-links{
+  font-size: 25px;
+  color: white;
 }
 
 .tabs {
@@ -131,17 +138,18 @@ ul.nav {
   text-align: center;
   color: #fff;
   text-shadow: 1px 1px 1px #000;
-  border-radius: 40px;
-  background-color: #3e46f3;
-  box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.6), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
-
+  border-radius: 10px;
+  background-color: rgb(88,28,242);
   &:hover {
     background-color: darkviolet;
   }
+}
 
-  &:active {
-    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6), inset 2px 2px 3px rgba(0, 0, 0, 0.6);
-  }
+.show-more-btn{
+  font-size: 1em;
+  color: white;
+  letter-spacing: 0.1em;
+  text-decoration: none;
 }
 
 @media (max-width: 600px) {

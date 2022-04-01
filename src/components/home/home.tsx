@@ -1,5 +1,5 @@
 import './home.scss'
-import {Box} from "@mui/material";
+import {Box, Link} from "@mui/material";
 import rocket from "../../assets/img/rocket.webp";
 import * as React from "react";
 
@@ -28,6 +28,11 @@ export function Home(){
                             </div>
                         </div>
                     </section>
+                    <div className="project-button-div mt-3 mb-3">
+                        <Link className="project-button" href = "/projects" underline="none">
+                            Projects
+                        </Link>
+                    </div>
                 </Box>
                 <Box className="headline-right-box">
                     <img

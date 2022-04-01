@@ -1,6 +1,6 @@
 import * as React from "react";
 import {useNavigate} from "react-router-dom";
-import {Box, Button, Grid} from "@mui/material";
+import {Box, Button, Grid, Link} from "@mui/material";
 import {Cancel, CheckCircle, GitHub, Language, Telegram, Twitter} from "@mui/icons-material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -122,33 +122,43 @@ function LaunchpadHome(props: any) {
                 className="img"
             />
             <div className="icons">
-                <Grid container justifyContent="flex-start" spacing={1}>
+                <div className= "d-flex justify-content-start flex-row" >
                     {typeof (props.project.projectInfo.socials.website) !== "undefined" ? (
-                        <Grid item xs={2}>
-                            <Button href={props.project.projectInfo.socials.website}>
-                                <Language/>
-                            </Button>
-                        </Grid>) : <></>}
-                    {typeof (props.project.projectInfo.socials.twitter) != "undefined" ? (
-                        <Grid item xs={2}>
-                            <Button href={props.project.projectInfo.socials.twitter}>
-                                <Twitter/>
-                            </Button>
-                        </Grid>) : <></>}
-                    {typeof (props.project.projectInfo.socials.telegram) != "undefined" ? (
-                        <Grid item xs={2}>
-                            <Button href={props.project.projectInfo.socials.telegram}>
-                                <Telegram/>
-                            </Button>
-                        </Grid>) : <></>}
-                    {typeof (props.project.projectInfo.socials.github) != "undefined" ? (
-                        <Grid item xs={2}>
-                            <Button href={props.project.projectInfo.socials.github}>
-                                <GitHub/>
-                            </Button>
-                        </Grid>
+                        <div className="d-flex me-4">
+                            <a title="Website" className="social-links" target="_blank"
+                               href={props.project.projectInfo.socials.website}>
+                                <i className="bi-globe"></i></a>
+                        </div>
                     ) : <></>}
-                </Grid>
+                    {typeof (props.project.projectInfo.socials.telegram) != "undefined" ? (
+                        <div className = "d-flex me-4">
+                            <a title="Telegram" className="social-links" target="_blank"
+                               href={props.project.projectInfo.socials.telegram}>
+                                <i className="bi-telegram"></i></a>
+                        </div>
+                     ) : <></>}
+                    {typeof (props.project.projectInfo.socials.twitter) != "undefined" ? (
+                        <div className="d-flex me-4">
+                            <a title="Twitter" className="social-links" target="_blank"
+                               href={props.project.projectInfo.socials.twitter}>
+                                <i className="bi-twitter"></i></a>
+                        </div>
+                    ) : <></>}
+                    {typeof (props.project.projectInfo.socials.github) != "undefined" ? (
+                        <div className="d-flex me-4">
+                            <a title="Github" className="social-links" target="_blank"
+                               href={props.project.projectInfo.socials.github}>
+                                <i className="bi-github"></i></a>
+                        </div>
+                     ) : <></>}
+                    {typeof (props.project.projectInfo.socials.discord) != "undefined" ? (
+                        <div className="d-flex me-4">
+                            <a title="Discord" className="social-links" target="_blank"
+                               href={props.project.projectInfo.socials.discord}>
+                                <i className="bi-discord"></i></a>
+                        </div>
+                    ) : <></>}
+                </div>
             </div>
             <div className="tabs">
                 <Tabs
@@ -189,12 +199,6 @@ function LaunchpadHome(props: any) {
                             <p className="content-text-title">PUBLIC Total Raise</p>
                             <p className="content-text">{tokenPrice}</p>
                         </div>
-                        <div className="content-spacing">
-                            <p className="content-text-title">
-                                Allocation per Winning Ticket
-                            </p>
-                            <p className="content-text">200BUSD</p>
-                        </div>
                     </div>
                 </div>
             ) : <>
@@ -216,7 +220,11 @@ function LaunchpadHome(props: any) {
                     )
                     : (
                         <div className="content">
-                            <p className="text-white">{props.project.projectInfo.description}</p>
+                            <p className="text-white">{props.project.projectInfo.description.substring(0, 250)}
+                                <a className="show-more-btn" href="javascript:void(0);" onClick={showProjectDetail} >
+                                    .......read more
+                                </a>
+                            </p>
                         </div>
                     )
                 }
