@@ -10,20 +10,14 @@ export function Home(){
                 <Box className="headline-left-box">
                     <section className="main-info">
                         <div>
-                            <p>What is Oracle Finance?</p>
+                            <p>What is Oracle LaunchPad?</p>
                             <p>
-                                A Financial Platform To Facilitate
-                                <br />A Multitude Of Cryptocurrency
-                                <br />
-                                Investing
+                                Next Generation of effective fundraising.
                             </p>
                             <div>
                                 <p>
-                                    Oracle is a community-governed, yield generating
-                                    <br />
-                                    deflationary protocol that is built for sustainable
-                                    <br />
-                                    growth in any market condition
+                                    Breaking barriers for small investors to the IDO platform with a no-tier system.
+                                    We aim to provide a high-quality investment opportunities for our investors.
                                 </p>
                             </div>
                         </div>
@@ -51,17 +45,19 @@ export function Home(){
             <section id="projects" className="mt-5 project-selection-container d-flex p-3 align-items-center">
                 <div className="project-selection-image d-none d-sm-block"></div>
                 <div className="project-selection-text p-5">
-                    <p>Oracle Ecosystem</p>
-                    <p>Oracle Finance will power many platforms and applications which will grow the entire ecosystem
-                        and help bring more profits to the treasury</p>
+                    <p>Project Selection Criteria</p>
+                    <p>Project launching IDO on Oracle LaunchPad needs to meet specific criteria in terms of
+                        idea, potential, project development and overall security.
+                    </p>
                 </div>
             </section>
 
             <section className="mt-5 detail-report-container d-flex p-3 align-items-center">
                 <div className="detail-report-text p-5">
-                    <p>Oracle Capital</p>
-                    <p>A percentage of treasury is allocated to Venture Funds, Liquid Token Funds, and Yield Farming
-                        for better capital efficiency and rewards for the entire ecosystem and its users.</p>
+                    <p>Detailed Report Generation</p>
+                    <p>Our teams of experts will evaluate each and every project and prepare a detailed report to
+                        help investors make an informed decision.
+                    </p>
                 </div>
                 <div className="detail-report-image d-none d-sm-block"></div>
             </section>
@@ -69,37 +65,36 @@ export function Home(){
             <section className="mt-5 tier-system-container d-flex p-3 align-items-center">
                 <div className="tier-system-image d-none d-sm-block"></div>
                 <div className="tier-system-text p-5">
-                    <p>Oracle Ecosystem</p>
-                    <p>Oracle Finance will power many platforms and applications which will grow the entire ecosystem
-                        and help bring more profits to the treasury</p>
+                    <p>Tierless System</p>
+                    <p>Unlike other launchpads, Oracle LaunchPad does not have a tier system.
+                        Investors who have staked ORFI tokens can take part in IDOs</p>
                 </div>
             </section>
 
-            <section className="project-selection-text-container d-flex justify-content-center">
-                <p>FOR PROJECT</p>
-            </section>
+            {/*<section className="project-selection-text-container d-flex justify-content-center">*/}
+            {/*    <p>FOR PROJECTS</p>*/}
+            {/*</section>*/}
 
-
-            <div className="mt-5 cards-container">
-                <div className="p-5 mt-3 flex-grow-1 me-3">
-                    <div/>
-                    <p>Staking & Bonding</p>
-                    <p>Primary ways for users to build wealth. Users can purchase ORCL at discounted price
-                        via bonding and/or can stake ORCL to receive passive yields</p>
-                </div>
-                <div className="p-5 mt-3 flex-grow-1 me-3">
-                    <div/>
-                    <p>Treasury</p>
-                    <p>Treasury is the engine of Oracle Finance and backs overall floor price, which ensures underlying
-                        price is independent of market volatility</p>
-                </div>
-                <div className="p-5 mt-3 flex-grow-1">
-                    <div />
-                    <p>Rewards Distribution</p>
-                    <p>The total profit generated by the protocol is distributed to all stakers in stable coins,
-                        thus generating a passive yield with relatively low risks</p>
-                </div>
-            </div>
+            {/*<div className="mt-5 cards-container">*/}
+            {/*    <div className="p-5 mt-3 flex-grow-1 me-3">*/}
+            {/*        <div/>*/}
+            {/*        <p>Private Sale</p>*/}
+            {/*        <p>Primary ways for users to build wealth. Users can purchase ORCL at discounted price*/}
+            {/*            via bonding and/or can stake ORCL to receive passive yields</p>*/}
+            {/*    </div>*/}
+            {/*    <div className="p-5 mt-3 flex-grow-1 me-3">*/}
+            {/*        <div/>*/}
+            {/*        <p>Treasury</p>*/}
+            {/*        <p>Treasury is the engine of Oracle Finance and backs overall floor price, which ensures underlying*/}
+            {/*            price is independent of market volatility</p>*/}
+            {/*    </div>*/}
+            {/*    <div className="p-5 mt-3 flex-grow-1">*/}
+            {/*        <div />*/}
+            {/*        <p>Rewards Distribution</p>*/}
+            {/*        <p>The total profit generated by the protocol is distributed to all stakers in stable coins,*/}
+            {/*            thus generating a passive yield with relatively low risks</p>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
         </div>
         )
 }
