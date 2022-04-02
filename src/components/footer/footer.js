@@ -22,8 +22,6 @@ export function Footer() {
                                                href="https://docs.oracledao.finance/">GitBook</a></li>
         </ul>
         <ul className="list-group">
-            <li className="list-group-item"><a className="nav-link" href="#flowChart">Workflow</a></li>
-            <li className="list-group-item"><a className="nav-link" href="#roadmap">Roadmap</a></li>
             <li className="list-group-item"><a className="nav-link"
                                                href="https://docs.oracledao.finance/whitepaper-and-roadmap/whitepaper"
                                                target="_blank">Whitepaper</a></li>

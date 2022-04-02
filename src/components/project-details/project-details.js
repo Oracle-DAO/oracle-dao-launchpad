@@ -39,6 +39,11 @@ export function ProjectDetails() {
   const [allowance, setAllowance] = React.useState(false);
   const [quantity, setQuantity] = React.useState("");
   const ipfsURL = "https://ipfs.infura.io/ipfs/";
+  const [time, setTime] = React.useState([]);
+  const [totalSupply, setTotalSupply] = React.useState(0);
+  const [tokenName, setTokenName] = React.useState("");
+
+
 
   let { id } = useParams();
   const { provider, address, chainID, checkWrongNetwork } = useWeb3Context();
@@ -62,12 +67,8 @@ export function ProjectDetails() {
         if (projectDetails && projectDetails.loading === false) {
             setProjectLoading(false);
             let projectTokenAddress = projectDetails.tokenInfo.projectTokenAddress;
-            // if(projectTokenAddress){
-            //     setTotalSupply(projectTokenAddress.totalIDOTokenSupply);
-            //     setTime(projectTokenAddress.projectTime);
-            // }
+            console.log(projectTokenAddress);
         }
-        // console.log(time, totalSupply);
     }, [projectDetails]);
 
   const projectContract = new ethers.Contract(id, PublicSale, provider);
