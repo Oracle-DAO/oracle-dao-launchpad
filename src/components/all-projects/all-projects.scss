@@ -5,7 +5,7 @@
 }
 
 .tab-div {
-  border-radius: 1.5em;
+  border-radius: 1em;
   background: rgba(100, 224, 196, 0.15);
 }
 
@@ -18,14 +18,15 @@
 
 ul.nav {
   li {
-    padding-inline: 2em;
+    padding-inline: 1.2em;
     padding-top: 0.7em;
     padding-bottom: 0.7em;
     text-align: center;
+    font-size: 14px;
     color: white;
     cursor: pointer;
     transition: all 0.7s;
-    border-radius: 1.5em;
+    border-radius: 1em;
 
     &:hover {
       background: grey;
