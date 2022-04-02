@@ -67,7 +67,6 @@ export function ProjectDetails() {
         if (projectDetails && projectDetails.loading === false) {
             setProjectLoading(false);
             let projectTokenAddress = projectDetails.tokenInfo.projectTokenAddress;
-            console.log(projectTokenAddress);
         }
     }, [projectDetails]);
 
