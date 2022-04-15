@@ -83,6 +83,9 @@
       margin-right: 3rem;
       width: 70%;
       border-radius: 22px;
+      display: flex;
+      flex-direction: column; 
+      justify-content: center;
 
       .MuiLinearProgress-root {
         height: 18px;
