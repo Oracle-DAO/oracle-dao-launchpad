@@ -42,33 +42,33 @@ export function Home(){
                 <p>WHY ORACLE LAUNCHPAD?</p>
             </section>
 
-            <section id="projects" className="mt-5 project-selection-container d-flex p-3 align-items-center">
-                <div className="project-selection-image d-none d-sm-block"></div>
-                <div className="project-selection-text p-5">
+            <section id="projects" className="mt-5 container-with-image d-flex p-3 align-items-center">
+                <div className="section-text p-5">
                     <p>Project Selection Criteria</p>
                     <p>Project launching IDO on Oracle LaunchPad needs to meet specific criteria in terms of
                         idea, potential, project development and overall security.
                     </p>
                 </div>
+                <div className="section-image d-none d-sm-block"></div>
             </section>
 
-            <section className="mt-5 detail-report-container d-flex p-3 align-items-center">
-                <div className="detail-report-text p-5">
+            <section className="mt-5 container-with-image d-flex p-3 align-items-center">
+                <div className="section-image d-none d-sm-block"></div>
+                <div className="section-text p-5">
                     <p>Detailed Report Generation</p>
                     <p>Our teams of experts will evaluate each and every project and prepare a detailed report to
                         help investors make an informed decision.
                     </p>
                 </div>
-                <div className="detail-report-image d-none d-sm-block"></div>
             </section>
 
-            <section className="mt-5 tier-system-container d-flex p-3 align-items-center">
-                <div className="tier-system-image d-none d-sm-block"></div>
-                <div className="tier-system-text p-5">
+            <section className="mt-5 container-with-image d-flex p-3 align-items-center">
+                <div className="section-text p-5">
                     <p>Tierless System</p>
                     <p>Unlike other launchpads, Oracle LaunchPad does not have a tier system.
                         Investors who have staked ORFI tokens can take part in IDOs</p>
                 </div>
+                <div className="section-image d-none d-sm-block"></div>
             </section>
 
             {/*<section className="project-selection-text-container d-flex justify-content-center">*/}
