@@ -1,48 +1,39 @@
-import './home.scss'
-import { Box, Link } from "@mui/material";
-import rocket from "../../assets/img/rocket.webp";
 import advisory from '../../assets/img/advisory.png';
 import audit from '../../assets/img/audit.png';
 import fundraising from '../../assets/img/fundraising.png';
+import './home.scss'
 
 export function Home() {
+    const downloadWhitepaper = () => {
+        window.open(
+            "https://docs.oracledao.finance/whitepaper-and-roadmap/whitepaper",
+            "_blank"
+        );
+    };
+    const launchApp = () => {
+        window.open(
+            "https://testapp.oracledao.finance/",
+            "_blank"
+        );
+    }
     return (
-        <div className="container pt-5">
-            <div className="headline-root">
-                <Box className="headline-left-box">
-                    <section className="main-info">
-                        <div>
-                            <p>What is Oracle LaunchPad?</p>
-                            <p>
-                                Next Generation of effective fundraising.
-                            </p>
-                            <div>
-                                <p>
-                                    Breaking barriers for small investors to the IDO platform with a no-tier system.
-                                    We aim to provide a high-quality investment opportunities for our investors.
-                                </p>
-                            </div>
-                        </div>
-                    </section>
-                    <div className="project-button-div mt-3 mb-3">
-                        <Link className="project-button" href="/projects" underline="none">
-                            Projects
-                        </Link>
+        <div className="container pt-5 home">
+            <section className="main-info d-flex justify-content-center">
+                <div>
+                    <p>What is Oracle LaunchPad?</p>
+                    <p>Next Generation of effective fundraising</p>
+                    <div>
+                        <p>Breaking barriers for small investors to the IDO platform with a no-tier system. We aim to provide a high-quality investment opportunities for our investors</p>
                     </div>
-                </Box>
-                <Box className="headline-right-box">
-                    <img
-                        src={rocket}
-                        alt="oracle-finance"
-                        className="headline-img"
-                    />
-                </Box>
-            </div>
+                    <div>
+                        <button type="button" className="btn btn-primary me-3 px-5 mt-3" onClick={() => launchApp()}>Try
+                            TestApp</button>
+                        <button type="button" className="btn btn-outline-primary px-5 mt-3" onClick={() => downloadWhitepaper()}>Download Whitepaper</button>
+                    </div>
+                </div>
+            </section >
 
-
-            <section className="project-selection-text-container d-flex justify-content-center">
-                <p>WHY ORACLE LAUNCHPAD?</p>
-            </section>
+            <p className="why-oracle">WHY ORACLE LAUNCHPAD?</p>
 
             <section id="projects" className="mt-5 container-with-image d-flex p-3 align-items-center">
                 <div className="section-text p-4">
@@ -105,6 +96,6 @@ export function Home() {
                 </div>
             </section>
 
-        </div>
+        </div >
     )
 }
