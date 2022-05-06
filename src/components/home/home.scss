@@ -76,9 +76,20 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-    background-image: url(../../assets/img/Project-selection.png);
     height: 350px;
     width: 50%;
+
+    &.criteria {
+      background-image: url(../../assets/img/Project-selection.png);
+    }
+
+    &.report {
+      background-image: url(../../assets/img/report.png);
+    }
+
+    &.tierless-system {
+      background-image: url(../../assets/img/tierless-system.png);
+    }
   }
 
   .section-text {
@@ -86,6 +97,17 @@
 
     p {
       &:nth-child(1) {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 32px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #16FCD2;
+      }
+
+      &:nth-child(2) {
         font-style: normal;
         font-weight: bold;
         font-size: 34px;
@@ -93,7 +115,7 @@
         color: #ffffff;
       }
 
-      &:nth-child(2) {
+      &:nth-child(3) {
         font-weight: 500;
         font-size: 18px;
         line-height: 32px;
@@ -139,6 +161,72 @@
   }
 }
 
+.our-help-container {
+  >p {
+    &:nth-child(1) {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 32px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #16FCD2;
+      text-align: center;
+    }
+
+    &:nth-child(2) {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 30px;
+      line-height: 48px;
+      text-align: center;
+      color: #FFFFFF;
+      margin-bottom: 2rem;
+    }
+  }
+
+  >div {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    border: 1px solid #1b385d;
+
+    &.right {
+      margin-right: 215px;
+    }
+
+    &.left {
+      margin-left: 215px;
+    }
+
+    img {
+      height: 165px;
+      margin-right: 2rem;
+    }
+
+    >div p {
+      &:nth-child(1) {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 25px;
+        line-height: 48px;
+        color: #FFFFFF;
+      }
+
+      &:nth-child(2) {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 27px;
+        color: #FFFFFF;
+      }
+    }
+  }
+}
 
 @media (max-width: 991px) {
   .headline-root {
@@ -182,12 +270,29 @@
 }
 
 @media (max-width: 575px) {
+  .container-with-image {
+    margin-top: 0px !important;
+  }
+
   .section-text {
     width: 100% !important;
+    padding: 1rem !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .our-help-container .right {
+    margin-right: 0px !important;
+  }
+
+  .our-help-container .left {
+    margin-left: 0px !important;
   }
 }
 
 @media (min-width: 992px) {
+
+
   .headline-root {
     display: flex;
     justify-content: center;
