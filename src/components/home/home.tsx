@@ -16,6 +16,7 @@ export function Home() {
             "_blank"
         );
     }
+
     return (
         <div className="container pt-5 home">
             <section className="main-info d-flex justify-content-center">
