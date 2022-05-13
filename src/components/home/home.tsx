@@ -4,15 +4,15 @@ import fundraising from '../../assets/img/fundraising.png';
 import './home.scss'
 
 export function Home() {
-    const downloadWhitepaper = () => {
+    const applyForIDO = () => {
         window.open(
-            "https://docs.oracledao.finance/whitepaper-and-roadmap/whitepaper",
+            "https://docs.google.com/forms/d/1CoxXz4-3GnhBuH_CqHDRxxH6Rf27OKsaYsfqs6DqNEM/",
             "_blank"
         );
     };
-    const launchApp = () => {
+    const projects = () => {
         window.open(
-            "https://testapp.oracledao.finance/",
+            "/projects",
             "_blank"
         );
     }
@@ -26,9 +26,8 @@ export function Home() {
                         <p>Breaking barriers for small investors to the IDO platform with a no-tier system. We aim to provide a high-quality investment opportunities for our investors</p>
                     </div>
                     <div>
-                        <button type="button" className="btn btn-primary me-3 px-5 mt-3" onClick={() => launchApp()}>Try
-                            TestApp</button>
-                        <button type="button" className="btn btn-outline-primary px-5 mt-3" onClick={() => downloadWhitepaper()}>Download Whitepaper</button>
+                        <button type="button" className="btn btn-primary me-3 px-5 mt-3" onClick={() => projects()}>Projects</button>
+                        <button type="button" className="btn btn-outline-primary px-5 mt-3" onClick={() => applyForIDO()}>Apply For IDO</button>
                     </div>
                 </div>
             </section >
